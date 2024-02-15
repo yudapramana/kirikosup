@@ -17,4 +17,13 @@ export default defineConfig({
             }
         })
     ],
+    resolve: {
+        alias: {
+          "@": "/resources/assets/js",
+         // use vue's runtime compiler to support vue components
+         // directly within blade templates
+          vue: "vue/dist/vue.esm-bundler.js",
+        },
+      },
+      envPrefix: ["VITE_", "MIX_"],
 });
