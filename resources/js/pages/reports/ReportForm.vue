@@ -86,6 +86,7 @@ onMounted(() => {
 
     flatpickr(".flatpickr", {
         dateFormat: "Y-m-d",
+        disableMobile: true,
     });
 });
 
