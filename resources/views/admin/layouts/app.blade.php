@@ -8,22 +8,21 @@
     <title>{{ setting('app_name') }}</title>
 
 
-
+    {{-- 
     @php
         $cwd = getcwd();
         $cssName = basename(glob($cwd . '/build/assets/*.css')[0], '.css');
         $jsName = basename(glob($cwd . '/build/assets/*.js')[0], '.js');
         $css = asset('build/assets/' . $cssName . '.css');
         $js = asset('build/assets/' . $jsName . '.js');
-    @endphp
+    @endphp --}}
 
-    <!-- uncomment @vite -->
+
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
-
     <!-- add this code -->
-    <link rel="stylesheet" href="{{ $css }}" id="css">
-    <script src="{{ $js }}" id="js"></script>
+    {{-- <link rel="stylesheet" href="{{ $css }}" id="css">
+    <script src="{{ $js }}" id="js"></script> --}}
 
 
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
