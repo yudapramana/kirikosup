@@ -2,6 +2,8 @@
 import { formatDate } from '../../helper.js';
 import { ref } from 'vue';
 import { useToastr } from "../../toastr.js";
+import { useAuthUserStore } from '../../stores/AuthUserStore';
+const authUserStore = useAuthUserStore();
 
 const toastr = useToastr();
 
@@ -17,22 +19,26 @@ const emit = defineEmits(['userDeleted', 'editUser', 'confirmUserDeletion']);
 
 const roles = ref([
     {
-        name: 'ADMIN',
+        name: 'SUPERADMIN',
         value: 1
+    }, 
+    {
+        name: 'ADMIN',
+        value: 2
     },
     {
         name: 'USER',
-        value: 2
+        value: 3
     }
 ]);
 
 const changeRole = (user, role) => {
     axios.patch(`/api/users/${user.id}/change-role`, {
-        role:role,
+        role: role,
     })
-    .then((()=> {
-        toastr.success('Role changed successfully');
-    }));
+        .then((() => {
+            toastr.success('Role changed successfully');
+        }));
 }
 
 const toggleSelection = () => {
@@ -42,18 +48,28 @@ const toggleSelection = () => {
 </script>
 
 <template>
-    <tr >
+    <tr>
         <td><input type="checkbox" :checked="selectAll" @change="toggleSelection" /></td>
         <td>{{ index + 1 }}</td>
-        <td>{{ user.name }}</td>
+        <td>
+            {{ user.name }} 
+            <p class="text-muted m-0 p-0" style="font-size: small !important;">
+                {{ user.org_name }}</p>
+        </td>
         <td>{{ user.email }}</td>
         <td>{{ user.formatted_created_at }}</td>
         <td>
-            <select name="role" id="role" class="form-control" @change="changeRole(user, $event.target.value)">
-                <option v-for="role in roles" :key="role.value" :value="role.value"
-                :selected="user.role === role.name">{{ role.name }}</option>
+            <template v-if="authUserStore.user.role == 'SUPERADMIN'">
+                <select name="role" id="role" class="form-control" @change="changeRole(user, $event.target.value)"  >
+                <option v-for="role in roles" :key="role.value" :value="role.value" :selected="user.role === role.name">{{
+                    role.name }}</option>
 
             </select>
+            </template>
+            <template v-else>
+                {{ user.role }}
+            </template>
+            
         </td>
         <td>
             <a href="#" @click.prevent="$emit('editUser', user)">
@@ -64,6 +80,4 @@ const toggleSelection = () => {
             </a>
         </td>
     </tr>
-
-    
 </template>

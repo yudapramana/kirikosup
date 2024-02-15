@@ -65,7 +65,7 @@ const logout = () => {
                             </p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="authUserStore.user.role == 'SUPERADMIN'">
                         <router-link to="/admin/organizations" active-class="active" class="nav-link">
                             <i class="nav-icon fas fa-cog"></i>
                             <p>
@@ -73,7 +73,7 @@ const logout = () => {
                             </p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'ADMIN'">
                         <router-link to="/admin/users" active-class="active" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
@@ -81,7 +81,7 @@ const logout = () => {
                             </p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="authUserStore.user.role == 'SUPERADMIN'">
                         <router-link to="/admin/settings" active-class="active" class="nav-link">
                             <i class="nav-icon fas fa-cog"></i>
                             <p>

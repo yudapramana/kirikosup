@@ -1,7 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core';
 
 export const useSettingStore = defineStore('SettingStore', () => {
     const setting = ref({

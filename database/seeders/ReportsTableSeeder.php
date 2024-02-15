@@ -74,6 +74,39 @@ class ReportsTableSeeder extends Seeder
                 'month' => 2,
                 'day' => 7,
             ),
+            5 => 
+            array (
+                'id' => 10,
+                'created_at' => '2024-02-15 07:17:48',
+                'updated_at' => '2024-02-15 07:17:48',
+                'user_id' => 1,
+                'date' => '2024-02-12',
+                'year' => 2024,
+                'month' => 2,
+                'day' => 12,
+            ),
+            6 => 
+            array (
+                'id' => 11,
+                'created_at' => '2024-02-15 07:18:42',
+                'updated_at' => '2024-02-15 07:18:42',
+                'user_id' => 1,
+                'date' => '2024-02-13',
+                'year' => 2024,
+                'month' => 2,
+                'day' => 13,
+            ),
+            7 => 
+            array (
+                'id' => 12,
+                'created_at' => '2024-02-15 08:53:12',
+                'updated_at' => '2024-02-15 08:53:12',
+                'user_id' => 5,
+                'date' => '2024-02-08',
+                'year' => 2024,
+                'month' => 2,
+                'day' => 8,
+            ),
         ));
         
         

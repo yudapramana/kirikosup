@@ -36,6 +36,9 @@ const updateProfile = () => {
         name: authUserStore.user.name,
         email: authUserStore.user.email,
         role: authUserStore.user.role,
+        nama_pemeriksa: authUserStore.user.nama_pemeriksa,
+        nip_pemeriksa: authUserStore.user.nip_pemeriksa,
+        jabatan: authUserStore.user.jabatan,
     })
     .then((response) => {
         toastr.success('Profile updated successfully!');
@@ -164,6 +167,32 @@ const handleFileChange = (event) => {
                                                 <span class="text-danger text-sm" v-if="errors && errors.email">{{ errors.email[0] }}</span>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
+                                            <div class="col-sm-10">
+                                                <input v-model="authUserStore.user.jabatan" type="text" class="form-control " id="jabatan"
+                                                    placeholder="Nama Pemeriksa">
+                                                <span class="text-danger text-sm" v-if="errors && errors.jabatan">{{ errors.jabatan[0] }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="nama_pemeriksa" class="col-sm-2 col-form-label">Nama Pemeriksa</label>
+                                            <div class="col-sm-10">
+                                                <input v-model="authUserStore.user.nama_pemeriksa" type="text" class="form-control " id="nama_pemeriksa"
+                                                    placeholder="Nama Pemeriksa">
+                                                <span class="text-danger text-sm" v-if="errors && errors.nama_pemeriksa">{{ errors.nama_pemeriksa[0] }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="nip_pemeriksa" class="col-sm-2 col-form-label">NIP Pemeriksa</label>
+                                            <div class="col-sm-10">
+                                                <input v-model="authUserStore.user.nip_pemeriksa" type="text" class="form-control " id="nip_pemeriksa"
+                                                    placeholder="Nama Pemeriksa">
+                                                <span class="text-danger text-sm" v-if="errors && errors.nip_pemeriksa">{{ errors.nip_pemeriksa[0] }}</span>
+                                            </div>
+                                        </div>
+                                        
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10">
                                                 <button type="submit" class="btn btn-success"><i

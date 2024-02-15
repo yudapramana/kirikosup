@@ -4,6 +4,7 @@ namespace App\Enums;
 
 enum RoleType: int
 {
-    case ADMIN = 1;
-    case USER = 2;
+    case SUPERADMIN = 1;
+    case ADMIN = 2;
+    case USER = 3;
 }

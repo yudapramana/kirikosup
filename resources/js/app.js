@@ -19,6 +19,8 @@ import App from './App.vue';
 
 import { useAuthUserStore } from './stores/AuthUserStore.js';
 import { useSettingStore } from './stores/SettingStore.js';
+import PrimeVue from 'primevue/config';
+
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -44,6 +46,7 @@ router.beforeEach( async (to, from) => {
 
 app.use(pinia);
 app.use(router);
+app.use(PrimeVue);
 
 
 // if(window.location.pathname === '/login') {

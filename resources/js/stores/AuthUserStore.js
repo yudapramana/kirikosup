@@ -8,6 +8,9 @@ export const useAuthUserStore = defineStore('AuthUserStore', () => {
         email: '',
         role: '',
         avatar: '',
+        nama_pemeriksa: '',
+        nip_pemeriksa: '',
+        jabatan: '',
     });
 
     const getAuthUser = async () => {

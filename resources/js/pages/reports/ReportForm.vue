@@ -5,9 +5,9 @@ import { useToastr } from '@/toastr';
 import { Form, Field } from 'vee-validate';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/themes/light.css'
+import { useAuthUserStore } from "../../stores/AuthUserStore.js";
 
-
-
+const authUserStore = useAuthUserStore();
 const router = useRouter();
 const route = useRoute();
 const toastr = useToastr();
@@ -18,10 +18,11 @@ const form = reactive({
     volume: 0,
     unit: '',
 });
+const editReportUserID = ref('');
 
 const handleSubmit = (values, actions) => {
-    
-    if(editMode.value) {
+
+    if (editMode.value) {
         editReport(values, actions)
     } else {
         createReport(values, actions);
@@ -57,13 +58,22 @@ const getReport = () => {
     axios.get(`/api/reports/${route.params.id}/edit`)
         .then((response) => {
             console.log(response);
-            form.date = response.data.report.date;
-            form.work_name = response.data.work_name;
-            form.work_detail = response.data.work_detail;
-            form.volume = response.data.volume;
-            form.unit = response.data.unit_value;
-            form.evidence = response.data.evidence;
 
+            console.log('authUserStore.user.id');
+            console.log(authUserStore.user.id);
+            console.log('response.data.report.user_id');
+            console.log(response.data.report.user_id);
+
+            if (editMode.value && authUserStore.user.id != response.data.report.user_id) {
+                router.push('/admin/reports');
+            } else {
+                form.date = response.data.report.date;
+                form.work_name = response.data.work_name;
+                form.work_detail = response.data.work_detail;
+                form.volume = response.data.volume;
+                form.unit = response.data.unit_value;
+                form.evidence = response.data.evidence;
+            }
         });
 };
 

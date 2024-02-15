@@ -8,20 +8,40 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $searchQuery = $request->search_query;
-        $users = User::query()
-                    ->when(request('search_query'), function ($q) use($searchQuery) {
-                        return $q->where('name', 'like', "%{$searchQuery}%");
-                    })
-                    ->with('org')
-                    // ->latest()
-                    ->paginate(setting('pagination_limit'));
+
+        $user = auth()->user();
+
+
+        $user_org_id = $user->org_id;
+
+        if($user->role == 'ADMIN') {
+            $users = User::query()
+            ->when(request('search_query'), function ($q) use ($searchQuery) {
+                return $q->where('name', 'like', "%{$searchQuery}%");
+            })
+            ->whereHas('org', function ($q) use ($user_org_id) {
+                $q->where('id', $user_org_id);
+            })
+            ->with('org')
+            ->paginate(setting('pagination_limit'));
+        } else {
+            $users = User::query()
+            ->when(request('search_query'), function ($q) use ($searchQuery) {
+                return $q->where('name', 'like', "%{$searchQuery}%");
+            })
+            
+            ->with('org')
+            ->paginate(setting('pagination_limit'));
+        }
 
         return $users;
     }
 
-    public function store() {
+    public function store()
+    {
 
         request()->validate([
             'name' => 'required',
@@ -40,7 +60,8 @@ class UserController extends Controller
 
     }
 
-    public function update(User $user){
+    public function update(User $user)
+    {
 
         $validated = request()->validate([
             'name' => 'required',
@@ -57,14 +78,16 @@ class UserController extends Controller
         ]);
 
         return $user;
-    }    
+    }
 
-    public function destroy(User $user) {
+    public function destroy(User $user)
+    {
         $user->delete();
         return response()->noContent();
     }
 
-    public function changeRole(User $user){
+    public function changeRole(User $user)
+    {
 
         $user->update([
             'role' => request('role'),
@@ -80,9 +103,10 @@ class UserController extends Controller
         return response()->json(['message' => 'Users deleted successfully']);
     }
 
-    public function fetch() {
+    public function fetch()
+    {
 
-      return auth()->user()->id;
+        return auth()->user()->id;
 
     }
 

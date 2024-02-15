@@ -12,19 +12,34 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $now = Carbon::now();
-        $year = $now->format('Y');
-        $month = $now->format('m');
+        $monthYear = request()->query('monthyear');
 
-        $reports = Report::query()
-                    ->where([
-                        'year' => $year,
-                        'month' => $month,
-                        'user_id' => $user_id
-                    ])
-                    ->orderBy('date', 'DESC')
-                    ->paginate(setting('pagination_limit'));
+        if($monthYear) {
+            $user_id = auth()->user()->id;
+            // $now = Carbon::now();
+            // $year = $now->format('Y');
+            // $month = $now->format('m');
+
+            $year = substr($monthYear, 0, 4);
+            $month = substr($monthYear, 5, 2);
+    
+            $reports = Report::query()
+                        ->where([
+                            'year' => $year,
+                            'month' => $month,
+                            'user_id' => $user_id
+                        ])
+                        ->orderBy('date', 'DESC')
+                        ->paginate(setting('pagination_limit'));
+        } else {
+            return collect(
+                [
+                    'data' => []
+                ]
+            );
+        }
+
+        
 
         return $reports;
     }

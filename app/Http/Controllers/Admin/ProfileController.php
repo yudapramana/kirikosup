@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        return $request->user()->only(['name', 'email', 'role', 'avatar']);
+        return $request->user()->only(['id', 'name', 'email', 'role', 'avatar', 'nama_pemeriksa', 'nip_pemeriksa', 'jabatan']);
     }
 
     public function update(Request $request)
@@ -20,6 +20,9 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', Rule::unique('users')->ignore($request->user()->id)],
+            'nama_pemeriksa' => ['required'],
+            'nip_pemeriksa' => ['required'],
+            'jabatan' => ['required'],
         ]);
 
         $request->user()->update($validated);
