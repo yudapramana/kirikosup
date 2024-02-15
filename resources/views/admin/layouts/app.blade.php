@@ -7,7 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ setting('app_name') }}</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
+    @php
+        $cwd = getcwd();
+        $cssName = basename(glob($cwd . '/build/assets/*.css')[0], '.css');
+        $jsName = basename(glob($cwd . '/build/assets/*.js')[0], '.js');
+        $css = asset('build/assets/' . $cssName . '.css');
+        $js = asset('build/assets/' . $jsName . '.js');
+    @endphp
+
+    <!-- uncomment @vite -->
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
+
+    <!-- add this code -->
+    <link rel="stylesheet" href="{{ $css }}" id="css">
+    <script src="{{ $js }}" id="js"></script>
+
 
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
