@@ -20,6 +20,8 @@
 
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
+    @vite('resources/js/app.js')
+
     <!-- add this code -->
     {{-- <link rel="stylesheet" href="{{ $css }}" id="css">
     <script src="{{ $js }}" id="js"></script> --}}
