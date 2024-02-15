@@ -30,6 +30,7 @@ class ReportController extends Controller
                             'user_id' => $user_id
                         ])
                         ->orderBy('date', 'DESC')
+                        ->with('works')
                         ->paginate(setting('pagination_limit'));
         } else {
             return collect(

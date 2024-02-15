@@ -7,7 +7,10 @@ import UserListItem from "./UserListItem.vue";
 import { debounce } from 'lodash';
 import { Bootstrap4Pagination } from 'laravel-vue-pagination';
 import { useToastr } from "../../toastr.js";
+import { useTableIndexStore } from "../../stores/TableIndexStore";
 
+
+const tableIndexStore = useTableIndexStore();
 const toastr = useToastr();
 
 

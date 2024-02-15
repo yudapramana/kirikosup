@@ -7,16 +7,19 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import { useStorage } from '@vueuse/core';
 import { useAuthUserStore } from "../../stores/AuthUserStore.js";
+import { useLoadingStore } from "../../stores/LoadingStore.js";
 
+const loadingStore = useLoadingStore();
 const authUserStore = useAuthUserStore();
-
 const reports = ref({ 'data': [] });
 
 const getReports = (page = 1) => {
+    loadingStore.toggleLoading();
     axios.get(`/api/reports?monthyear=${mySelected.value}&page=${page}`)
         .then((response) => {
             console.log(response.data);
             reports.value = response.data;
+            loadingStore.toggleLoading();
         });
 };
 
@@ -95,9 +98,9 @@ const printLCKB = () => {
     // window.location = '/print-lckb/' + mySelected.value;
     if (!authUserStore.user.nama_pemeriksa) {
         alert('Nama dan NIP pemeriksa belum diisi!. Harap diisi di profil!');
-    } else if(!mySelected.value) {
+    } else if (!mySelected.value) {
         alert('Pilih bulan dan tahun terlebih dahulu!');
-    }else {
+    } else {
         window.open('/print-lckb/' + mySelected.value, '_blank');
     }
 }
@@ -164,7 +167,10 @@ onMounted(() => {
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="table-responsive overlay-wrapper">
+                                <div v-if="loadingStore.isLoading" class="overlay"><i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                                    <div class="text-bold pt-2">Loading...</div>
+                                </div>
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>

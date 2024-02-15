@@ -13,7 +13,7 @@ defineProps({
     <footer class="main-footer">
 
         <div class="float-right d-none d-sm-inline">
-            {{authUserStore.user.name}}
+            V.1.0.1
         </div>
 
         <strong>Copyright &copy; 2024 <a href="#"> {{ settings?.app_name }}</a>.</strong> All rights

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\PrintController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,9 @@ Route::get('/get-password', function () {
 });
 
 Route::middleware('auth')->group(function() {
+    Route::get('/api/stats/all', [DashboardController::class, 'all']);
+
+    Route::get('/api/stats/reports', [DashboardController::class, 'reports']);
     Route::get('/api/fusers', [UserController::class, 'fetch']);
 
     Route::get('/api/fetch-orgs', [OrganizationController::class, 'fetch']);

@@ -127,7 +127,7 @@
 
     <table class="ttdfooter" style="width:100%">
         <tr>
-            <td width="29%">Diperika oleh</td>
+            <td width="29%">Diperiksa oleh</td>
             <td></td>
             <td></td>
             <td></td>

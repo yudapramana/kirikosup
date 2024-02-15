@@ -17,7 +17,7 @@ class Report extends Model
 
     protected $appends = ['uid', 'uname', 'uemail'];
 
-    protected $with = ['works'];
+    // protected $with = ['works'];
 
     public function user() {
         return $this->belongsTo(User::class, 'user_id');

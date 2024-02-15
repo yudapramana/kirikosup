@@ -3,8 +3,12 @@ import { formatDate } from '../../helper.js';
 import { ref } from 'vue';
 import { useToastr } from "../../toastr.js";
 import { useAuthUserStore } from '../../stores/AuthUserStore';
-const authUserStore = useAuthUserStore();
+import { useTableIndexStore } from "../../stores/TableIndexStore";
 
+
+const tableIndexStore = useTableIndexStore();
+const authUserStore = useAuthUserStore();
+const fromIndex = ref(0);
 const toastr = useToastr();
 
 
@@ -54,13 +58,13 @@ const toggleSelection = () => {
         <td>
             {{ user.name }} 
             <p class="text-muted m-0 p-0" style="font-size: small !important;">
-                {{ user.org_name }}</p>
+                {{ user.jabatan }} pada {{ user.org_name }}</p>
         </td>
         <td>{{ user.email }}</td>
         <td>{{ user.formatted_created_at }}</td>
-        <td>
+        <td width="20%">
             <template v-if="authUserStore.user.role == 'SUPERADMIN'">
-                <select name="role" id="role" class="form-control" @change="changeRole(user, $event.target.value)"  >
+                <select name="role" id="role" class="form-control" @change="changeRole(user, $event.target.value)" style="width: 200px;"  >
                 <option v-for="role in roles" :key="role.value" :value="role.value" :selected="user.role === role.name">{{
                     role.name }}</option>
 
