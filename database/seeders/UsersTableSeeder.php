@@ -132,6 +132,15 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now(),
                 'organization_id' => 1
             ],
+            [
+                'name' => 'DENI MARLINA S.Pd.I',
+                'username' => '197703072023212012',
+                'jabatan' => 'Arsiparis Ahli Pertama ',
+                'email' => '197703072023212012@kemenag.go.id',
+                'password' => Hash::make('197703072023212012'),
+                'updated_at' => \Carbon\Carbon::now(),
+                'organization_id' => 1
+            ],
 
             // Staff Kepegawaian
             [
