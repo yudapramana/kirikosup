@@ -12,13 +12,13 @@ const toastr = useToastr();
 
 
 const users = ref({ 'data': [] });
-const orgs = ref({ 'data' : []});
+const orgs = ref({ 'data': [] });
 const editing = ref(false);
 const formValues = ref({
     id: "",
     name: "",
     email: "",
-    organization_id : "",
+    organization_id: "",
 });
 const form = ref(null);
 
@@ -235,29 +235,33 @@ onMounted(() => {
 
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" v-model="selectAll" @change="selectAllUsers" /></th>
-                                <th style="width: 10px">#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Registered Date</th>
-                                <th>Roles</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody v-if="users.data.length > 0">
-                            <UserListItem v-for="(user, index) in users.data" :key="user.id" :user="user" :index="index"
-                                @edit-user="editUser" @confirm-user-deletion="confirmUserDeletion"
-                                @toggle-selection="toggleSelection" :select-all="selectAll" />
-                        </tbody>
-                        <tbody v-else>
-                            <tr>
-                                <td colspan="6" class="text-center">No results found...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" v-model="selectAll" @change="selectAllUsers" /></th>
+                                    <th style="width: 10px">#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Registered Date</th>
+                                    <th>Roles</th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                            <tbody v-if="users.data.length > 0">
+                                <UserListItem v-for="(user, index) in users.data" :key="user.id" :user="user" :index="index"
+                                    @edit-user="editUser" @confirm-user-deletion="confirmUserDeletion"
+                                    @toggle-selection="toggleSelection" :select-all="selectAll" />
+                            </tbody>
+                            <tbody v-else>
+                                <tr>
+                                    <td colspan="6" class="text-center">No results found...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
             <Bootstrap4Pagination :data="users" @pagination-change-page="getUsers" :limit="1" :keepLength="true" />
@@ -286,7 +290,8 @@ onMounted(() => {
                         <div class="form-group">
                             <label for="organization_id">Satuan Kerja</label>
 
-                            <Field v-model="formValues.organization_id" name="organization_id" as="select" class="form-control" id="organization_id">
+                            <Field v-model="formValues.organization_id" name="organization_id" as="select"
+                                class="form-control" id="organization_id">
                                 <option v-for="org in orgs.data" :value="org.id" :key="org.id">
                                     {{ org.name }}
                                 </option>

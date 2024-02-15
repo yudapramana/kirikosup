@@ -218,28 +218,30 @@ onMounted(() => {
 
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" v-model="selectAll" @change="selectAllOrgs" /></th>
-                                <th style="width: 10px">#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Status</th>
-                                <th>Options</th>
-                            </tr>
-                        </thead>
-                        <tbody v-if="orgs.data.length > 0">
-                            <OrgListItem v-for="(org, index) in orgs.data" :key="org.id" :org="org" :index="index"
-                                @edit-org="editOrg" @confirm-org-deletion="confirmOrgDeletion"
-                                @toggle-selection="toggleSelection" :select-all="selectAll" />
-                        </tbody>
-                        <tbody v-else>
-                            <tr>
-                                <td colspan="6" class="text-center">No results found...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" v-model="selectAll" @change="selectAllOrgs" /></th>
+                                    <th style="width: 10px">#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                            <tbody v-if="orgs.data.length > 0">
+                                <OrgListItem v-for="(org, index) in orgs.data" :key="org.id" :org="org" :index="index"
+                                    @edit-org="editOrg" @confirm-org-deletion="confirmOrgDeletion"
+                                    @toggle-selection="toggleSelection" :select-all="selectAll" />
+                            </tbody>
+                            <tbody v-else>
+                                <tr>
+                                    <td colspan="6" class="text-center">No results found...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <Bootstrap4Pagination :data="orgs" @pagination-change-page="getOrgs" :limit="1" :keepLength="true" />
