@@ -170,7 +170,7 @@ onMounted(() => {
                                         <tr>
                                             <th scope="col">Tanggal</th>
                                             <th scope="col" class="text-center">#</th>
-                                            <th scope="col">Pekerjaan</th>
+                                            <th scope="col" width="50%">Pekerjaan</th>
                                             <!-- <th scope="col">Detil Kerja</th> -->
                                             <th scope="col" class="text-right">Vol</th>
                                             <th scope="col">Unit</th>
