@@ -42,6 +42,9 @@ class PrintController extends Controller
         ];
 
         $user = auth()->user();
+        if(!$user) {
+            return redirect('/admin/dashboard');
+        }
         $user_id = $user->id;
         $works = Work::whereHas('report', function ($q) use ($user_id, $year, $month) {
             $q->where([
