@@ -28,7 +28,7 @@ Route::get('/print-lckb/{monthYear}', [PrintController::class, 'document']);
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/get-password', function () {
