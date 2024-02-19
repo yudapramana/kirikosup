@@ -62,7 +62,7 @@
             <td>
                 <p style="margin-left: 20px; padding-left:20px;">{{ $user->name }} / {{ $user->username }} </p>
             </td>
-            <td width="30%" rowspan="4" style="align-content: flex-start; align:left; vertical-align:top">Keterangan:</td>
+            <td width="23%" rowspan="4" style="align-content: flex-start; align:left; vertical-align:top">Keterangan:</td>
         </tr>
         <tr>
             <td>JABATAN</td>
