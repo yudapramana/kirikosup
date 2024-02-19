@@ -211,7 +211,7 @@ onMounted(() => {
                                         <h3 class="timeline-header"> <span class="time"><i class="fas fa-clock"></i> {{
                                             formatDateStringHuman(report.date) }}</span></h3>
                                         <div class="timeline-body">
-                                            {{ work.work_name }} <br>
+                                            [{{ work.volume }} {{ work.unit }}] {{ work.work_name }}<br>
                                             <span style="font-size: smaller;">
                                                 {{ work.work_detail }}
                                             </span>

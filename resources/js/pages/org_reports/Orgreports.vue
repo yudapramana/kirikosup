@@ -236,17 +236,19 @@ onMounted(() => {
                             <template v-for="work in report.works" :key="work.id">
                                 <div>
                                     <div class="timeline-item">
-                                        <span class="time"> <router-link :to="`/admin/reports/${work.id}/edit`"
+                                        <span class="time"> {{ work.volume }} {{ work.unit }}
+                                            <!-- <router-link :to="`/admin/reports/${work.id}/edit`"
                                                 class="badge badge-info right" style="margin-right: 5px;"> Edit
                                             </router-link>
                                             <a class="badge badge-danger right" href="#"
                                                 @click.prevent="$event => deleteWork(index, work.id)">
                                                 Delete
-                                            </a></span>
+                                            </a> -->
+                                        </span>
                                         <h3 class="timeline-header"> <span class="time"><i class="fas fa-clock"></i> {{
                                             formatDateStringHuman(report.date) }}</span></h3>
                                         <div class="timeline-body">
-                                            {{ work.work_name }} <br>
+                                             {{ work.work_name }}<br>
                                             <span style="font-size: smaller;">
                                                 {{ work.work_detail }}
                                             </span>
