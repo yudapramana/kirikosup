@@ -110,7 +110,11 @@
                     <td>{{ $key + 1 }}</td>
                     <td style="text-align: left; align:left;">
                         <span style="font-weight: bolder">{{ $work->work_name }}</span> <br>
-                        <span style="font-size: small">{{ $work->work_detail_merge }}</span>
+                        <span style="font-size: small">
+                            <pre>
+                            {{ $work->work_detail_merge }}
+                        </pre>
+                        </span>
                     </td>
                     <td>{{ $work->total_volume }}</td>
                     <td style="text-align: left;">{{ $work->unit }}</td>
