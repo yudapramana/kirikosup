@@ -111,9 +111,7 @@
                     <td style="text-align: left; align:left;">
                         <span style="font-weight: bolder">{{ $work->work_name }}</span> <br>
                         <span style="font-size: small">
-                            <pre>
                             {{ $work->work_detail_merge }}
-                        </pre>
                         </span>
                     </td>
                     <td>{{ $work->total_volume }}</td>
