@@ -23,6 +23,7 @@ import { useMonthYearStore } from './stores/MonthYearStore.js';
 import PrimeVue from 'primevue/config';
 import { useStorage } from '@vueuse/core';
 import { useDashboardStore } from './stores/DashboardStore.js';
+import { useMasterDataStore } from './stores/MasterDataStore.js';
 
 
 
@@ -40,13 +41,15 @@ router.beforeEach(async (to, from) => {
         const settingStore = useSettingStore();
         const monthYearStore = useMonthYearStore();
         const dashboardStore = useDashboardStore();
+        const masterDataStore = useMasterDataStore();
 
         await Promise.all([
             authUserStore.getAuthUser(),
             settingStore.getSetting(),
             monthYearStore.setMonthYear(),
             dashboardStore.getReportsCount(),
-            dashboardStore.getStatsCount()
+            dashboardStore.getStatsCount(),
+            masterDataStore.getOrgList()
         ]);
 
     } 

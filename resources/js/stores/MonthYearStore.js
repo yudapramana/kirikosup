@@ -9,10 +9,25 @@ import { useStorage } from '@vueuse/core';
 
 export const useMonthYearStore = defineStore('MonthYearStore', () => {
     const mySelected = useStorage('SettingStore:mySelected', ref(''));
+    const myOptions = ref([
+        {
+            text: moment().subtract(2, 'months').format('MMMM  YYYY'),
+            id: moment().subtract(2, 'months').format('YYYY-MM')
+        },
+        {
+            text: moment().subtract(1, 'months').format('MMMM  YYYY'),
+            id: moment().subtract(1, 'months').format('YYYY-MM')
+        },
+        {
+            text: moment().format('MMMM  YYYY'),
+            id: moment().format('YYYY-MM')
+        },
+    ]);
+
 
     const setMonthYear = () => {
         mySelected.value = moment().format('YYYY-MM');
     };
 
-    return { mySelected, setMonthYear };
+    return { mySelected, myOptions, setMonthYear };
 });

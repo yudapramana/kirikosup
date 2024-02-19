@@ -7,6 +7,8 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/themes/light.css'
 import { useAuthUserStore } from "../../stores/AuthUserStore.js";
 
+const loading = ref(false);
+
 const authUserStore = useAuthUserStore();
 const router = useRouter();
 const route = useRoute();
@@ -22,6 +24,7 @@ const editReportUserID = ref('');
 
 const handleSubmit = (values, actions) => {
 
+    loading.value = true;
     if (editMode.value) {
         editReport(values, actions)
     } else {
@@ -39,6 +42,9 @@ const createReport = (values, actions) => {
         })
         .catch((error) => {
             actions.setErrors(error.response.data.errors);
+        })
+        .finally(() => {
+            loading.value = false;
         });
 };
 
@@ -50,6 +56,9 @@ const editReport = (values, actions) => {
         })
         .catch((error) => {
             actions.setErrors(error.response.data.errors);
+        })
+        .finally(() => {
+            loading.value = false;
         });
 };
 
@@ -195,7 +204,12 @@ onMounted(() => {
                                 </div>
 
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary btn-block" :disabled="loading">
+                                    <div v-if="loading" class="spinner-border spinner-border-sm mr-2" role="status">
+                                        <span class="sr-only ">Loading...</span>
+                                    </div>
+                                    <span v-else>Submit</span>
+                                </button>
                             </Form>
                         </div>
                     </div>

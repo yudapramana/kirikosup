@@ -110,6 +110,7 @@ const updateUser = (values, { setErrors }) => {
             users.value.data[index] = response.data;
             $("#defaultModal").modal("hide");
             toastr.success("User updated successfully!");
+            authUserStore.getAuthUser();
         })
         .catch((error) => {
             if (error.response) {

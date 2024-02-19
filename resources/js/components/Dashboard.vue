@@ -9,27 +9,11 @@ import { useStorage } from '@vueuse/core';
 import { useAuthUserStore } from "../stores/AuthUserStore.js";
 import { useLoadingStore } from "../stores/LoadingStore.js";
 import { useDashboardStore } from "../stores/DashboardStore";
+import { useMonthYearStore } from "../stores/MonthYearStore.js";
 
 const dashboardStore = useDashboardStore();
 const loadingStore = useLoadingStore();
-
-const totalWorksCount = ref(0);
-const totalReportsCount = ref(0);
-const mySelected = useStorage('SettingStore:mySelected', ref(''));
-const myOptions = ref([
-    {
-        text: moment().subtract(2, 'months').format('MMMM  YYYY'),
-        id: moment().subtract(2, 'months').format('YYYY-MM')
-    },
-    {
-        text: moment().subtract(1, 'months').format('MMMM  YYYY'),
-        id: moment().subtract(1, 'months').format('YYYY-MM')
-    },
-    {
-        text: moment().format('MMMM  YYYY'),
-        id: moment().format('YYYY-MM')
-    },
-]);
+const monthYearStore = useMonthYearStore();
 
 
 
@@ -74,9 +58,9 @@ onMounted(() => {
                         <div class="inner">
                             <div class="d-flex justify-content-between">
                                 <h3>{{ dashboardStore.totalWorksCount }}</h3>
-                                <select v-model="mySelected" @change="getSummary()"
+                                <select v-model="monthYearStore.mySelected" @change="getSummary()"
                                     style="height: 2rem; outline: 2px solid transparent;" class="px-1 rounded border-0">
-                                    <option v-for="opt in myOptions" :value="opt.id" :key="opt.id">{{ opt.text }}</option>
+                                    <option v-for="opt in monthYearStore.myOptions" :value="opt.id" :key="opt.id">{{ opt.text }}</option>
                                 </select>
                             </div>
                             <p>Pekerjaan</p>
@@ -100,9 +84,9 @@ onMounted(() => {
                         <div class="inner">
                             <div class="d-flex justify-content-between">
                                 <h3>{{ dashboardStore.totalReportsCount }}</h3>
-                                <select v-model="mySelected" disabled style="height: 2rem; outline: 2px solid transparent;"
+                                <select v-model="monthYearStore.mySelected" disabled style="height: 2rem; outline: 2px solid transparent;"
                                     class="px-1 rounded border-0">
-                                    <option v-for="opt in myOptions" :value="opt.id" :key="opt.id">{{ opt.text }}</option>
+                                    <option v-for="opt in monthYearStore.myOptions" :value="opt.id" :key="opt.id">{{ opt.text }}</option>
                                 </select>
                             </div>
                             <p>Hari Bekerja</p>

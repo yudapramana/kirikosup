@@ -6,6 +6,7 @@ import UpdateSetting from './pages/settings/UpdateSetting.vue';
 import UpdateProfile from './pages/profile/UpdateProfile.vue';
 import Login from './pages/auth/Login.vue';
 import OrganizationList from './pages/orgs/OrgList.vue';
+import OrgReports from './pages/org_reports/OrgReports.vue'
 
 export default[
     {
@@ -22,6 +23,11 @@ export default[
         path: '/admin/reports',
         name: 'admin.reports',
         component: ListReports,
+    },
+    {
+        path: '/admin/org-reports',
+        name: 'admin.orgreports',
+        component: OrgReports,
     },
     {
         path: '/admin/reports/create',

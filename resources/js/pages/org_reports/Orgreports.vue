@@ -1,0 +1,295 @@
+<script setup>
+import axios from "axios";
+import { ref, onMounted, reactive, watch, toDisplayString } from "vue";
+import { formatDate, formatDateString } from '../../helper.js';
+import { Bootstrap4Pagination } from 'laravel-vue-pagination';
+import Swal from 'sweetalert2';
+import moment from 'moment';
+import { useStorage } from '@vueuse/core';
+import { useAuthUserStore } from "../../stores/AuthUserStore.js";
+import { useLoadingStore } from "../../stores/LoadingStore.js";
+import Select2 from 'vue3-select2-component';
+import { useMasterDataStore } from "../../stores/MasterDataStore.js";
+
+const previewData = ref(false);
+const previewPDF = ref(false);
+const loading = ref(false);
+const placeholder = ref('Pilih Item');
+const loadingStore = useLoadingStore();
+const authUserStore = useAuthUserStore();
+const masterDataStore = useMasterDataStore();
+const reports = ref({ 'data': [] });
+
+const mySelected = useStorage('SettingStore:mySelected', ref(''));
+
+const myOptions = ref([
+    {
+        text: moment().subtract(2, 'months').format('MMMM  YYYY'),
+        id: moment().subtract(2, 'months').format('YYYY-MM')
+    },
+    {
+        text: moment().subtract(1, 'months').format('MMMM  YYYY'),
+        id: moment().subtract(1, 'months').format('YYYY-MM')
+    },
+    {
+        text: moment().format('MMMM  YYYY'),
+        id: moment().format('YYYY-MM')
+    },
+]);
+
+const getReports = (page = 1) => {
+    loadingStore.toggleLoading();
+    axios.get(`/api/reports?monthyear=${mySelected.value}&page=${page}&user_id=${masterDataStore.userId}`)
+        .then((response) => {
+            console.log(response.data);
+            reports.value = response.data;
+            loadingStore.toggleLoading();
+            loading.value = false;
+            previewData.value = true;
+            previewPDF.value = false;
+
+        });
+};
+
+const getPDF = () => {
+    previewData.value = false;
+    previewPDF.value = true;
+}
+
+onMounted(() => {
+    masterDataStore.getOrgList();
+
+    if(authUserStore.user.role == 'ADMIN') {
+        masterDataStore.getUserListbyOrgID(authUserStore.user.org_id);
+    }
+});
+</script>
+
+<template>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">LCHK Satker</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">LCKH Satker</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="mont" style="font-size: small;">Bulan</label>
+                                        <Select2 v-model="mySelected" :options="myOptions" :placeholder="placeholder" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'REVIEWER'">
+                                    <div class="form-group">
+                                        <label for="organization_id" style="font-size: small;">Satuan Kerja</label>
+                                        <Select2 v-model="masterDataStore.orgId" :options="masterDataStore.orgList"
+                                            @change="masterDataStore.getUserList" @select="masterDataStore.getUserList"
+                                            :placeholder="placeholder" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6" v-else>
+                                    <div class="form-group">
+                                        <label for="organization_id" style="font-size: small;">Satuan Kerja</label>
+                                        <input type="text" class="form-control" disabled :value="authUserStore.user.org_name">
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-12" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'REVIEWER'">
+                                    <div class="form-group">
+                                        <label for="user_id" style="font-size: small;">Pilih Pegawai</label>
+                                        <Select2 v-model="masterDataStore.userId" :options="masterDataStore.userList"
+                                            :placeholder="placeholder" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12" v-else>
+                                    <div class="form-group">
+                                        <label for="user_id" style="font-size: small;">Pilih Pegawai</label>
+                                        <Select2 v-model="masterDataStore.userId" :options="masterDataStore.userList"
+                                            :placeholder="placeholder" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+
+                                    <button type="submit" class="btn btn-primary btn-block" :disabled="loading"
+                                        @click.prevent="getReports">
+                                        <div v-if="loading" class="spinner-border spinner-border-sm mr-2" role="status">
+                                            <span class="sr-only ">Loading...</span>
+                                        </div>
+                                        <span v-else>Preview Data</span>
+                                    </button>
+                                </div>
+
+                                <div class="col-6">
+
+                                    <button type="submit" class="btn btn-warning btn-block" :disabled="loading"
+                                        @click.prevent="getPDF">
+                                        <div v-if="loading" class="spinner-border spinner-border-sm mr-2" role="status">
+                                            <span class="sr-only ">Loading...</span>
+                                        </div>
+                                        <span v-else>Preview PDF</span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <!-- <select v-model="masterDataStore.orgId" class="custom-select rounded-0">
+                                <option v-for="opt in masterDataStore.orgList" :value="opt.id" :key="opt.id">{{
+                                    opt.text }}</option>
+                            </select> -->
+                        </div>
+                    </div>
+
+
+
+                    <div class="card" v-if="previewData">
+                        <div class="card-body">
+                            <div class="table-responsive overlay-wrapper">
+                                <div v-if="loadingStore.isLoading" class="overlay"><i
+                                        class="fas fa-3x fa-sync-alt fa-spin"></i>
+                                    <div class="text-bold pt-2">Loading...</div>
+                                </div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col" class="text-center">#</th>
+                                            <th scope="col" width="50%">Pekerjaan</th>
+                                            <!-- <th scope="col">Detil Kerja</th> -->
+                                            <th scope="col" class="text-right">Vol</th>
+                                            <th scope="col">Unit</th>
+                                            <th scope="col">Eviden</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody v-if="reports.data?.length > 0">
+
+
+                                        <template v-for="(report, index) in reports.data">
+                                            <template v-if="report.works.length > 0">
+
+                                                <tr v-for="(work, iSub) in report.works" :key="work.id">
+                                                    <td v-if="iSub === 0" :rowspan="report.works.length" class="s"
+                                                        style="white-space: pre;">
+                                                        {{ formatDateString(report.date) }}</td>
+                                                    <td class="text-center">{{ iSub + 1 }}</td>
+                                                    <td class="s">
+                                                        {{ work.work_name }} <br>
+                                                        <p class="text-muted m-0 p-0" style="font-size: small !important;">
+                                                            {{
+                                                                work.work_detail }}</p>
+                                                    </td>
+                                                    <!-- <td class="s">{{ work.work_detail }}</td> -->
+                                                    <td class="s text-right">{{ work.volume }}</td>
+                                                    <td class="s">{{ work.unit }}</td>
+                                                    <td class="s">{{ work.evidence }}</td>
+
+
+                                                </tr>
+                                            </template>
+
+                                            <template v-else>
+                                                <tr :key="report.id">
+                                                    <td class="s">{{
+                                                        formatDateString(report.date) }}
+                                                    </td>
+                                                    <td class="s text-center">
+                                                        <a href="#"
+                                                            @click.prevent="$event => deleteReport(index, report.id)">
+                                                            <i class="fa fa-trash text-danger"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td colspan="7" class="text-center">Belum ada data...</td>
+                                                </tr>
+                                            </template>
+
+                                        </template>
+
+
+
+                                        <!-- <template v-for="item in items">
+                                        <tr v-for="(subitem, iSub) in item.sub" :key="subitem.id">
+                                            <td>{{ subitem.date }}</td>
+                                            <td v-if="iSub === 0" :rowspan="item.sub.length" class="s">{{ item.name }}</td>
+                                        </tr>
+                                    </template> -->
+                                    </tbody>
+
+                                    <tbody v-if="reports.data?.length === 0">
+                                        <tr>
+                                            <td colspan="7" class="text-center">Tidak ada hasil, silahkan pilih
+                                                bulan...
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <Bootstrap4Pagination :data="reports" @pagination-change-page="getReports" :limit="1" :keepLength="true"
+                        v-if="previewData" />
+
+
+                    <div v-if="previewPDF">
+                        <embed :src="`/preview-lckb/${mySelected}/${masterDataStore.userId}`" width="100%" height="600"
+                            type='application/pdf'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+.select2-selection {
+    height: auto !important;
+}
+
+/* 
+.select2-selection__rendered {
+line-height: 34px !important;
+}
+
+.select2-selection {
+height: 34px !important;
+}
+
+.select2-selection__rendered {
+    line-height: 34px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 35px !important;
+}
+
+.select2-selection__arrow {
+    height: 35px !important;
+} */
+</style>

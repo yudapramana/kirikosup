@@ -93,12 +93,12 @@
                 <th>VOL</th>
                 <th>UNIT</th>
             </tr>
-            <tr style="background-color:rgb(165, 162, 162)">
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
+            <tr style="background-color:rgb(165, 162, 162);">
+                <th style="font-size: 9pt;">1</th>
+                <th style="font-size: 9pt;">2</th>
+                <th style="font-size: 9pt;">3</th>
+                <th style="font-size: 9pt;">4</th>
+                <th style="font-size: 9pt;">5</th>
             </tr>
 
         </thead>

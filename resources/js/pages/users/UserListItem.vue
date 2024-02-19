@@ -46,6 +46,7 @@ const changeRole = (user, role) => {
     })
         .then((() => {
             toastr.success('Role changed successfully');
+            authUserStore.getAuthUser();
         }));
 }
 

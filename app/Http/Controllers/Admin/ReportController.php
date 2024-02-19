@@ -15,7 +15,8 @@ class ReportController extends Controller
         $monthYear = request()->query('monthyear');
 
         if($monthYear) {
-            $user_id = auth()->user()->id;
+
+            $user_id = request()->has('user_id') ? request()->query('user_id') : auth()->user()->id;
             
             // $now = Carbon::now();
             // $year = $now->format('Y');

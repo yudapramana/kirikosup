@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MasterController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\PrintController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -24,6 +25,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 Route::get('/print-lckb/{monthYear}', [PrintController::class, 'document']);
+Route::get('/preview-lckb/{monthYear}/{user_id}', [PrintController::class, 'preview']);
 
 
 
@@ -36,6 +38,11 @@ Route::get('/get-password', function () {
 });
 
 Route::middleware('auth')->group(function() {
+
+    Route::get('/api/master', [MasterController::class, 'index']);
+
+    Route::get('/api/reports', [ReportController::class, 'index']);
+
     Route::get('/api/stats/all', [DashboardController::class, 'all']);
 
     Route::get('/api/stats/reports', [DashboardController::class, 'reports']);
