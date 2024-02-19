@@ -37,7 +37,7 @@ export const useMasterDataStore = defineStore('MasterDataStore', () => {
         await axios.get('/api/master', {
             params: {
                 type: 'users',
-                id: org.id
+                id: org
             }
         })
             .then((response) => {

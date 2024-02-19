@@ -10,6 +10,8 @@ import { useAuthUserStore } from "../../stores/AuthUserStore.js";
 import { useLoadingStore } from "../../stores/LoadingStore.js";
 import Select2 from 'vue3-select2-component';
 import { useMasterDataStore } from "../../stores/MasterDataStore.js";
+// import Dropdown from 'primevue/dropdown';
+
 
 const previewData = ref(false);
 const previewPDF = ref(false);
@@ -59,7 +61,7 @@ const getPDF = () => {
 onMounted(() => {
     masterDataStore.getOrgList();
 
-    if(authUserStore.user.role == 'ADMIN') {
+    if (authUserStore.user.role == 'ADMIN') {
         masterDataStore.getUserListbyOrgID(authUserStore.user.org_id);
     }
 });
@@ -95,40 +97,73 @@ onMounted(() => {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="mont" style="font-size: small;">Bulan</label>
-                                        <Select2 v-model="mySelected" :options="myOptions" :placeholder="placeholder" />
+                                        <!-- <Select2 v-model="mySelected" :options="myOptions" :placeholder="placeholder" /> -->
+                                        <select v-model="mySelected" class="custom-select rounded-0">
+                                            <option v-for="opt in myOptions" :value="opt.id" :key="opt.id">{{ opt.text }}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="col-6" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'REVIEWER'">
+                                <div class="col-6"
+                                    v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'REVIEWER'">
                                     <div class="form-group">
                                         <label for="organization_id" style="font-size: small;">Satuan Kerja</label>
-                                        <Select2 v-model="masterDataStore.orgId" :options="masterDataStore.orgList"
+
+                                        <!-- <Dropdown v-model="masterDataStore.orgId" :options="masterDataStore.orgList" optionLabel="name" placeholder="Select a City" class="form-control" /> -->
+
+                                        <!-- <Select2 v-model="masterDataStore.orgId" :options="masterDataStore.orgList"
                                             @change="masterDataStore.getUserList" @select="masterDataStore.getUserList"
-                                            :placeholder="placeholder" />
+                                            :placeholder="placeholder" /> -->
+
+                                        <select v-model="masterDataStore.orgId" class="custom-select rounded-0"
+                                            :placeholder="placeholder"
+                                            @change="masterDataStore.getUserList(masterDataStore.orgId)"
+                                            @select="masterDataStore.getUserList(masterDataStore.orgId)">
+                                            <option v-for="opt in masterDataStore.orgList" :value="opt.id" :key="opt.id">{{
+                                                opt.text }}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="col-6" v-else>
                                     <div class="form-group">
                                         <label for="organization_id" style="font-size: small;">Satuan Kerja</label>
-                                        <input type="text" class="form-control" disabled :value="authUserStore.user.org_name">
-                                        
+                                        <input type="text" class="form-control" disabled
+                                            :value="authUserStore.user.org_name">
+
                                     </div>
                                 </div>
 
-                                <div class="col-12" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'REVIEWER'">
+                                <div class="col-12"
+                                    v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'REVIEWER'">
                                     <div class="form-group">
                                         <label for="user_id" style="font-size: small;">Pilih Pegawai</label>
-                                        <Select2 v-model="masterDataStore.userId" :options="masterDataStore.userList"
-                                            :placeholder="placeholder" />
+                                        <!-- <Select2 v-model="masterDataStore.userId" :options="masterDataStore.userList"
+                                            :placeholder="placeholder" /> -->
+
+                                        <select v-model="masterDataStore.userId" class="custom-select rounded-0"
+                                            :placeholder="placeholder">
+                                            <option v-for="opt in masterDataStore.userList" :value="opt.id" :key="opt.id">{{
+                                                opt.text }}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="col-12" v-else>
                                     <div class="form-group">
                                         <label for="user_id" style="font-size: small;">Pilih Pegawai</label>
-                                        <Select2 v-model="masterDataStore.userId" :options="masterDataStore.userList"
-                                            :placeholder="placeholder" />
+                                        <!-- <Select2 v-model="masterDataStore.userId" :options="masterDataStore.userList"
+                                            :placeholder="placeholder" /> -->
+
+                                        <select v-model="masterDataStore.userId" class="custom-select rounded-0"
+                                            :placeholder="placeholder">
+                                            <option v-for="opt in masterDataStore.userList" :value="opt.id" :key="opt.id">{{
+                                                opt.text }}
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
 
