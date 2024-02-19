@@ -21,9 +21,9 @@ import { useAuthUserStore } from './stores/AuthUserStore.js';
 import { useSettingStore } from './stores/SettingStore.js';
 import { useMonthYearStore } from './stores/MonthYearStore.js';
 import PrimeVue from 'primevue/config';
-import { useStorage } from '@vueuse/core';
 import { useDashboardStore } from './stores/DashboardStore.js';
 import { useMasterDataStore } from './stores/MasterDataStore.js';
+import Select2 from 'vue3-select2-component';
 
 
 
@@ -58,6 +58,8 @@ router.beforeEach(async (to, from) => {
 app.use(pinia);
 app.use(router);
 app.use(PrimeVue);
+app.component('Select2', Select2)
+
 
 
 // if(window.location.pathname === '/login') {
