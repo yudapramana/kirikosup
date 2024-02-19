@@ -19,7 +19,11 @@ import App from './App.vue';
 
 import { useAuthUserStore } from './stores/AuthUserStore.js';
 import { useSettingStore } from './stores/SettingStore.js';
+import { useMonthYearStore } from './stores/MonthYearStore.js';
 import PrimeVue from 'primevue/config';
+import { useStorage } from '@vueuse/core';
+import { useDashboardStore } from './stores/DashboardStore.js';
+
 
 
 const pinia = createPinia();
@@ -30,18 +34,22 @@ const router = createRouter({
     history: createWebHistory(),
 });
 
-router.beforeEach( async (to, from) => {
+router.beforeEach(async (to, from) => {
     const authUserStore = useAuthUserStore();
-    if(authUserStore.user.name === '' && to.name !== 'admin.login') {
+    if (authUserStore.user.name === '' && to.name !== 'admin.login') {
         const settingStore = useSettingStore();
+        const monthYearStore = useMonthYearStore();
+        const dashboardStore = useDashboardStore();
 
         await Promise.all([
             authUserStore.getAuthUser(),
             settingStore.getSetting(),
+            monthYearStore.setMonthYear(),
+            dashboardStore.getReportsCount(),
+            dashboardStore.getStatsCount()
         ]);
 
-
-    }
+    } 
 });
 
 app.use(pinia);

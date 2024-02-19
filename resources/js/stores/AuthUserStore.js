@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { useStorage } from '@vueuse/core';
+
 
 export const useAuthUserStore = defineStore('AuthUserStore', () => {
-    const user = ref({
+    const user = useStorage('AuthUserStore:user', ref({
         name: '',
         email: '',
         role: '',
@@ -11,8 +13,8 @@ export const useAuthUserStore = defineStore('AuthUserStore', () => {
         nama_pemeriksa: '',
         nip_pemeriksa: '',
         jabatan: '',
-    });
-
+    }));
+    
     const getAuthUser = async () => {
         await axios.get('/api/profile')
             .then((response) => {

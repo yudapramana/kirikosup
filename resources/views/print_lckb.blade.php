@@ -60,9 +60,9 @@
             <td width="15%">NAMA / NIP</td>
             <td>&nbsp;:&nbsp;</td>
             <td>
-                <p style="margin-left: 20px; padding-left:20px;">{{ $user->name }} </p>
+                <p style="margin-left: 20px; padding-left:20px;">{{ $user->name }} / {{ $user->username }} </p>
             </td>
-            <td width="30%" rowspan="4"></td>
+            <td width="30%" rowspan="4" style="align-content: flex-start; align:left; vertical-align:top">Keterangan:</td>
         </tr>
         <tr>
             <td>JABATAN</td>
@@ -110,9 +110,9 @@
                     <td>{{ $key + 1 }}</td>
                     <td style="text-align: left; align:left;">
                         <span style="font-weight: bolder">{{ $work->work_name }}</span> <br>
-                        <span style="font-size: small">{{ $work->work_detail }}</span>
+                        <span style="font-size: small">{{ $work->work_detail_merge }}</span>
                     </td>
-                    <td>{{ $work->volume }}</td>
+                    <td>{{ $work->total_volume }}</td>
                     <td style="text-align: left;">{{ $work->unit }}</td>
                     <td>{{ $work->evidence }}</td>
 
@@ -127,7 +127,7 @@
 
     <table class="ttdfooter" style="width:100%">
         <tr>
-            <td width="29%">Diperiksa oleh</td>
+            <td width="29%">Atasan langsung</td>
             <td></td>
             <td></td>
             <td></td>

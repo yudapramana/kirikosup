@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mpdf\Mpdf as PDF;
 use Illuminate\Support\Facades\Storage;
+use DB;
 
 class PrintController extends Controller
 {
@@ -46,13 +47,19 @@ class PrintController extends Controller
             return redirect('/admin/dashboard');
         }
         $user_id = $user->id;
-        $works = Work::whereHas('report', function ($q) use ($user_id, $year, $month) {
+        $works = Work::groupBy('work_name', 'unit')
+        // ->select([DB::raw("*, sum(volume) as total_volume"), DB::raw('GROUP_CONCAT(work_detail SEPARATOR ', ') as work_detail_merge')])
+        ->selectRaw("*, sum(volume) as total_volume, GROUP_CONCAT(work_detail SEPARATOR '\n ') as work_detail_merge")
+        ->whereHas('report', function ($q) use ($user_id, $year, $month) {
             $q->where([
                 'user_id' => $user_id,
                 'year' => $year,
                 'month' => $month
             ]);
-        })->get();
+        })
+        ->get();
+
+        // return $works;
 
 
         setlocale(LC_TIME, 'id_ID');

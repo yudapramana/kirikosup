@@ -8,10 +8,11 @@ import moment from 'moment';
 import { useStorage } from '@vueuse/core';
 import { useAuthUserStore } from "../stores/AuthUserStore.js";
 import { useLoadingStore } from "../stores/LoadingStore.js";
+import { useDashboardStore } from "../stores/DashboardStore";
 
+const dashboardStore = useDashboardStore();
 const loadingStore = useLoadingStore();
 
-const statsAll = ref({});
 const totalWorksCount = ref(0);
 const totalReportsCount = ref(0);
 const mySelected = useStorage('SettingStore:mySelected', ref(''));
@@ -30,45 +31,15 @@ const myOptions = ref([
     },
 ]);
 
-const getReportsCount = () => {
-    loadingStore.toggleLoading();
-    console.log(mySelected.value);
-    axios.get('/api/stats/reports', {
-        params: {
-            monthyear: mySelected.value,
-        }
-    })
-        .then((response) => {
-            totalWorksCount.value = response.data.totalWorksCount;
-            totalReportsCount.value = response.data.totalReportsCount;
-            loadingStore.toggleLoading();
-        });
-};
 
-const getStatsCount = () => {
-    console.log(mySelected.value);
-    loadingStore.toggleLoading();
-    axios.get('/api/stats/all', {
-        params: {
-            monthyear: mySelected.value,
-        }
-    })
-        .then((response) => {
-            statsAll.value = response.data.statsAll;
-            console.log(response.data.statsAll);
-            loadingStore.toggleLoading();
-        });
-};
 
 const getSummary = () => {
-    getReportsCount();
-    getStatsCount();
+    dashboardStore.getReportsCount();
+    dashboardStore.getStatsCount();
 }
 
 onMounted(() => {
-    getReportsCount();
-    getStatsCount();
-    console.log(statsAll.value);
+    // console.log(dashboardStore.reportCompletion.value);
 });
 
 
@@ -102,7 +73,7 @@ onMounted(() => {
                         </div>
                         <div class="inner">
                             <div class="d-flex justify-content-between">
-                                <h3>{{ totalWorksCount }}</h3>
+                                <h3>{{ dashboardStore.totalWorksCount }}</h3>
                                 <select v-model="mySelected" @change="getSummary()"
                                     style="height: 2rem; outline: 2px solid transparent;" class="px-1 rounded border-0">
                                     <option v-for="opt in myOptions" :value="opt.id" :key="opt.id">{{ opt.text }}</option>
@@ -128,7 +99,7 @@ onMounted(() => {
                         </div>
                         <div class="inner">
                             <div class="d-flex justify-content-between">
-                                <h3>{{ totalReportsCount }}</h3>
+                                <h3>{{ dashboardStore.totalReportsCount }}</h3>
                                 <select v-model="mySelected" disabled style="height: 2rem; outline: 2px solid transparent;"
                                     class="px-1 rounded border-0">
                                     <option v-for="opt in myOptions" :value="opt.id" :key="opt.id">{{ opt.text }}</option>
@@ -164,7 +135,7 @@ onMounted(() => {
                                     </p>
 
 
-                                    <div class="progress-group" v-for="stat in statsAll" :key="stat.org_name">
+                                    <div class="progress-group" v-for="stat in dashboardStore.reportCompletion" :key="stat.org_name">
                                         {{ stat.org_name }}
                                         <span class="float-right"><b>{{ stat.count }}</b>/ {{ stat.users_count }}</span>
                                         <div class="progress progress-sm">
@@ -257,7 +228,7 @@ onMounted(() => {
 
 
                 <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box" v-for="(stat, index) in statsAll" :key="stat">
+                    <div class="info-box" v-for="(stat, index) in dashboardStore.reportCompletion" :key="stat">
 
                         <div class="info-box-content">
                             <span class="info-box-text">{{ index }}</span>

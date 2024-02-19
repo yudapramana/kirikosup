@@ -78,7 +78,7 @@ class DashboardController extends Controller
         });
 
         return response()->json([
-            'statsAll' => $data,
+            'reportCompletion' => $data,
         ]);
     }
 }

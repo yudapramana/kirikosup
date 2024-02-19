@@ -33,6 +33,10 @@ const roles = ref([
     {
         name: 'USER',
         value: 3
+    },
+    {
+        name: 'REVIEWER',
+        value: 4
     }
 ]);
 

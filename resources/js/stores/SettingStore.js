@@ -4,10 +4,9 @@ import { ref } from "vue";
 import { useStorage } from '@vueuse/core';
 
 export const useSettingStore = defineStore('SettingStore', () => {
-    const setting = ref({
+    const setting = useStorage('SettingStore:setting', {
         app_name: '',
     });
-
     const theme = useStorage('SettingStore:theme', ref('light'));
     const toggle = useStorage('SettingStore:toggle', ref('expanded'));
 

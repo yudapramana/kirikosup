@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('report_id')->constrained()->cascadeOnDelete();
 
             $table->text('work_name');
-            $table->text('work_detail');
+            $table->text('work_detail')->nullable();
 
             $table->integer('volume');
             $table->tinyInteger('unit')->default(UnitType::KEGIATAN->value);

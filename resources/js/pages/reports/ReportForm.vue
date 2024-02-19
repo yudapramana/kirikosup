@@ -129,7 +129,7 @@ onMounted(() => {
                         <div class="card-body">
                             <Form @submit="handleSubmit" v-slot:default="{ errors }">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="date">Tanggal</label>
                                             <input v-model="form.date" type="date" class="form-control flatpickr"
@@ -137,9 +137,9 @@ onMounted(() => {
                                             <span class="invalid-feedback">{{ errors.date }}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="work_name">Pekerjaan</label>
+                                            <label for="work_name">Uraian Tugas / RHK / Pekerjaan</label>
                                             <input v-model="form.work_name" type="text" class="form-control"
                                                 :class="{ 'is-invalid': errors.work_name }" id="work_name"
                                                 placeholder="Masukkan pekerjaan...">
@@ -148,7 +148,7 @@ onMounted(() => {
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="work_detail">Uraian Tugas</label>
+                                    <label for="work_detail">Deskripsi Tugas (Opsional)</label>
                                     <textarea v-model="form.work_detail" class="form-control"
                                         :class="{ 'is-invalid': errors.work_detail }" id="work_detail" rows="3"
                                         placeholder="Masukkan deskripsi tugas..."></textarea>

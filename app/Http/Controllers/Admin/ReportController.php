@@ -16,6 +16,7 @@ class ReportController extends Controller
 
         if($monthYear) {
             $user_id = auth()->user()->id;
+            
             // $now = Carbon::now();
             // $year = $now->format('Y');
             // $month = $now->format('m');
@@ -51,7 +52,7 @@ class ReportController extends Controller
         $validated = request()->validate([
             'date' => 'required|date',
             'work_name' => 'required',
-            'work_detail' => 'required',
+            'work_detail' => 'sometimes',
             'volume'    => 'required|numeric|min:1',
             'unit'  => 'required',
             'evidence' => 'required'

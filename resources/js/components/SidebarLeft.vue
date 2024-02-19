@@ -14,8 +14,10 @@ const authUserStore = useAuthUserStore();
 const logout = () => {
     axios.post('/logout')
         .then((response) => {
+            localStorage.clear(); 
             authUserStore.user.name = '';
             router.push('/login');
+            
         });
 };
 
