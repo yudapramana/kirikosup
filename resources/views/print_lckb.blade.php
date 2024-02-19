@@ -62,7 +62,7 @@
             <td>
                 <p style="margin-left: 20px; padding-left:20px;">{{ $user->name }} / {{ $user->username }} </p>
             </td>
-            <td width="23%" rowspan="4" style="align-content: flex-start; align:left; vertical-align:top">Keterangan:</td>
+            <td width="30%" rowspan="4" style="align-content: flex-start; align:left; vertical-align:top">Keterangan:</td>
         </tr>
         <tr>
             <td>JABATAN</td>
@@ -109,9 +109,9 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td style="text-align: left; align:left;">
-                        <span style="font-weight: bolder">{{ $work->work_name }}</span> <br>
-                        <span style="font-size: small">
-                            {{ $work->work_detail_merge }}
+                        <span style="font-weight: bolder">{{ ltrim($work->work_name) }}</span> <br>
+                        <span style="font-size:x-small">
+                            <pre>{{ ltrim($work->work_detail_merge) }}</pre>
                         </span>
                     </td>
                     <td>{{ $work->total_volume }}</td>
