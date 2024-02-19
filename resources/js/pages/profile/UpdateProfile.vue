@@ -14,7 +14,7 @@ const widget = window.cloudinary.createUploadWidget(
     (error, result) => {
         if(!error && result && result.event === 'success') {
             console.log('Done Uploading...', result.info);
-            image_cloud_id.value = result.info.public_id;
+            image_cloud_id.value = result.info.secure_url;
         }
 
         if (!error && result && result.event == 'close') { 
@@ -119,12 +119,12 @@ const handleFileChange = (event) => {
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <!-- <input @change="handleFileChange" ref="fileInput" type="file" class="d-none">
-                                <img @click="openFileInput" class="profile-user-img img-circle" :src="authUserStore.user.avatar" alt="User profile picture"> -->
-                                <input @change="handleFileChange" ref="fileInput" type="hidden" class="d-none">
+                                <!-- <input @change="handleFileChange" ref="fileInput" type="file" class="d-none"> -->
+                                <img @click="openUploadWidget" class="profile-user-img img-circle" :src="authUserStore.user.avatar" alt="User profile picture">
+                                <!-- <input @change="handleFileChange" ref="fileInput" type="hidden" class="d-none"> -->
                                 <!-- <img @click="openUploadWidget" class="profile-user-img img-circle" :src="authUserStore.user.avatar" alt="User profile picture"> -->
                                 <!-- profile_picture_pegawai/hhmk4hzeqytpoehlne2a -->
-                                <CloudImage @click="openUploadWidget" :image-name="authUserStore.user.avatar" />
+                                <!-- <CloudImage @click="openUploadWidget" :image-name="authUserStore.user.avatar" /> -->
                            
                             </div>
 

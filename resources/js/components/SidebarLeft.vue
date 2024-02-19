@@ -35,9 +35,9 @@ const logout = () => {
 
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <CloudImage :image-name="authUserStore.user.avatar" />
+                    <!-- <CloudImage :image-name="authUserStore.user.avatar" /> -->
 
-                    <!-- <img :src="authUserStore.user.avatar" class="img-circle elevation-2" alt="User Image"> -->
+                    <img :src="authUserStore.user.avatar" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block" style="font-size: small;">{{ authUserStore.user.name }}</a>

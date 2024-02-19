@@ -15,3 +15,10 @@ export function formatDateString(value) {
         return moment(String(value)).format('dddd, [\r\n]YYYY-MM-DD');
     }
 }
+
+export function formatDateStringHuman(value) {
+    if(value) {
+        moment.locale('id');
+        return moment(String(value)).format('dddd, DD MMMM YYYY');
+    }
+}
