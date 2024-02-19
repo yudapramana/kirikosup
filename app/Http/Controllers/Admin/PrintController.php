@@ -31,8 +31,8 @@ class PrintController extends Controller
             'orientation' => 'L',
             'margin_header' => '3',
             'margin_top' => '10',
-            'margin_bottom' => '20',
-            'margin_footer' => '2',
+            'margin_bottom' => '10',
+            'margin_footer' => '1',
         ]);
         $document->showImageErrors = true;
 
