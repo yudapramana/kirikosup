@@ -44,6 +44,11 @@ onMounted(() => {
         deferredPrompt.value = null;
     });
     window.addEventListener('resize', screenDisplayStore.toggleIsMobile);
+    console.log('screenDisplayStore');
+    console.log(screenDisplayStore.isMobile);
+    console.log(screenDisplayStore.sWidth);
+    console.log(screenDisplayStore.sHeight);
+
 });
 </script>
 

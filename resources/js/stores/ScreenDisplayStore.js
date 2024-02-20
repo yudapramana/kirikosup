@@ -20,8 +20,13 @@ export const useScreenDisplayStore = defineStore('ScreenDisplayStore', () => {
         if (screen.width <= 760) {
             isMobile.value = true;
         } else {
-            isMobile.value =  false
+            isMobile.value = false
         }
+
+        console.log('screenDisplayStore');
+        console.log(isMobile.value);
+        console.log(sWidth.value);
+        console.log(sHeight.value);
     };
 
     return { isMobile, sWidth, sHeight, toggleIsMobile };
