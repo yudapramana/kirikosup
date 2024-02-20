@@ -40,21 +40,27 @@ const myOptions = ref([
 ]);
 
 const getReports = (page = 1) => {
-    loadingStore.toggleLoading();
+    loading.value = true;
     axios.get(`/api/reports?monthyear=${mySelected.value}&page=${page}&user_id=${masterDataStore.userId}`)
         .then((response) => {
             console.log(response.data);
             reports.value = response.data;
-            loadingStore.toggleLoading();
             loading.value = false;
             previewData.value = true;
             previewPDF.value = false;
+            loading.value = false;
         });
 };
 
 const getPDF = () => {
+    loading.value = true;
     previewData.value = false;
     previewPDF.value = true;
+
+    setTimeout(function () {
+        loading.value = false;
+    }, 2000)
+
 }
 
 
@@ -221,7 +227,7 @@ onMounted(() => {
                                                     @click.prevent="$event => deleteWork(index, work.id)">
                                                     Hapus
                                                 </a> -->
-                                                [{{ work.volume }} {{ work.unit }}] 
+                                                [{{ work.volume }} {{ work.unit }}]
                                             </span>
                                             <h3 class="timeline-header" style="font-size: smaller;"> <span class="time"><i
                                                         class="fas fa-clock"></i> {{
