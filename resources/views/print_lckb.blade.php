@@ -44,14 +44,14 @@
 
 <body>
     <div style="text-align: center; margin-bottom: 0; padding-bottom:0;">
-        <img width="70" src="images/logo_kemenag.png" style="text-align: center; margin-bottom: 0; padding-bottom:0;" />
+        <img width="67" src="images/logo_kemenag.png" style="text-align: center; margin-bottom: 0; padding-bottom:0;" />
     </div>
 
-    <p style="align:center; text-align:center; margin-bottom: 0; padding-bottom:0;">
+    <p style="align:center; text-align:center; margin-bottom: 5pt; padding-bottom:0; margin-top:3pt">
         <span class="titlelaporan"> LAPORAN CAPAIAN KINERJA BULANAN</span> <br>
         <span style="font-weight: bold">KEMENTERIAN AGAMA REPUBLIK INDONESIA</span> <br>
         <span>Bulan: {{ $month }} | Tahun : {{ $year }}</span> <br>
-        <span>&nbsp;</span>
+        {{-- <span style="font-size: xx-small">&nbsp;</span> --}}
     </p>
 
 
@@ -78,7 +78,7 @@
 
     </table>
 
-    <span>&nbsp;</span>
+    <span style="font-size: xx-small">&nbsp;</span>
 
     <table style="width:100%; font-size:11pt; text-align:center">
         <thead>

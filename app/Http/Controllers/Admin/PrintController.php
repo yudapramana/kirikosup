@@ -30,10 +30,10 @@ class PrintController extends Controller
             'mode' => 'utf-8',
             'format' => 'A4-L',
             'orientation' => 'L',
-            'margin_header' => '3',
-            'margin_top' => '10',
-            'margin_bottom' => '10',
-            'margin_footer' => '1',
+            'margin_header' => '1',
+            'margin_top' => '7',
+            'margin_bottom' => '7',
+            'margin_footer' => '2',
         ]);
         $document->showImageErrors = true;
 
