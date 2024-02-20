@@ -1,13 +1,16 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { ref, onMounted, computed, watch } from 'vue';
 import AppNavbar from './components/AppNavbar.vue';
 import SidebarLeft from './components/SidebarLeft.vue';
 import SidebarRight from './components/SidebarRight.vue';
 import AppFooter from './components/AppFooter.vue';
 import { useAuthUserStore } from './stores/AuthUserStore';
 import { useSettingStore } from './stores/SettingStore';
+import { useScreenDisplayStore } from './stores/ScreenDisplayStore.js';
 
-
+const router = useRouter();
+const screenDisplayStore = useScreenDisplayStore();
 const deferredPrompt = ref(null);
 const authUserStore = useAuthUserStore();
 const settingStore = useSettingStore();
@@ -22,6 +25,15 @@ const dismiss = async () => {
 const install = async () => {
     deferredPrompt.prompt();
 }
+
+watch(() => authUserStore.user.name, function () {
+
+    if(authUserStore.user.name == '') {
+        router.push('/login');
+    }
+    console.log('value changes detected');
+});
+
 onMounted(() => {
     window.addEventListener("beforeinstallprompt", e => {
         e.preventDefault();
@@ -31,7 +43,8 @@ onMounted(() => {
     window.addEventListener("appinstalled", () => {
         deferredPrompt.value = null;
     });
-})
+    window.addEventListener('resize', screenDisplayStore.toggleIsMobile);
+});
 </script>
 
 <template>

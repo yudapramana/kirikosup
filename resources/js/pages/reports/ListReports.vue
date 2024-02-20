@@ -111,8 +111,6 @@ const printLCKB = () => {
 onMounted(() => {
     console.log(mySelected.value);
     getReports();
-    screenDisplayStore.toggleIsMobile();
-    window.addEventListener('resize', screenDisplayStore.toggleIsMobile);
 });
 </script>
 
@@ -123,7 +121,7 @@ onMounted(() => {
                 <div class="col-sm-6">
                     <h1 class="m-0">Laporan Kerja</h1>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" v-if="!screenDisplayStore.isMobile">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Laporan Kerja</li>
@@ -203,6 +201,7 @@ onMounted(() => {
 
                     <!-- TRY -->
                     <div class="timeline" v-if="screenDisplayStore.isMobile">
+                        <hr>
                         <template v-for="(report, index) in reports.data">
                             <template v-if="report.works.length > 0">
 
@@ -216,11 +215,11 @@ onMounted(() => {
                                             <span class="time">
                                                 <router-link :to="`/admin/reports/${work.id}/edit`"
                                                     class="badge badge-info right" style="margin-right: 3px;">
-                                                    Edit
+                                                    Ubah
                                                 </router-link>
                                                 <a href="#" class="badge badge-danger right"
                                                     @click.prevent="$event => deleteWork(index, work.id)">
-                                                    Delete
+                                                    Hapus
                                                 </a>
                                             </span>
                                             <h3 class="timeline-header" style="font-size: smaller;"> <span class="time"><i
@@ -241,8 +240,8 @@ onMounted(() => {
                                     <span class="bg-primary badge badge-primary badge-sm">
                                         {{ formatDateStringHuman(report.date) }}
                                     </span>
-                                    <a style="margin-left: 3px;" href="#" @click.prevent="$event => deleteReport(index, report.id)">
-                                        <i class="fa fa-trash text-danger"></i>
+                                    <a class="badge badge-danger" style="margin-left: 3px;" href="#" @click.prevent="$event => deleteReport(index, report.id)">
+                                        <!-- <i class="fa fa-trash text-danger"></i> --> hapus
                                     </a>
                                 </div>
                                 <div :key="report.id">

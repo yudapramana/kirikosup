@@ -25,7 +25,7 @@ export const useMonthYearStore = defineStore('MonthYearStore', () => {
     ]);
 
 
-    const setMonthYear = () => {
+    const setMonthYear = async () => {
         mySelected.value = moment().format('YYYY-MM');
     };
 

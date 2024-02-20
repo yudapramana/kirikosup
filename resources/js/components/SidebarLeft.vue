@@ -3,6 +3,8 @@ import { useRouter } from 'vue-router';
 import { useAuthUserStore } from '../stores/AuthUserStore';
 import { useSettingStore } from '../stores/SettingStore';
 import CloudImage from '../components/CloudImage.vue';
+import { getActivePinia } from "pinia"
+
 
 
 const router = useRouter();
@@ -17,7 +19,7 @@ const logout = () => {
             localStorage.clear(); 
             authUserStore.user.name = '';
             router.push('/login');
-            
+            // getActivePinia()._s.forEach(store => store.$reset());
         });
 };
 

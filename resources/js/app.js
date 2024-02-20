@@ -51,9 +51,9 @@ router.beforeEach(async (to, from) => {
         const masterDataStore = useMasterDataStore();
 
         await Promise.all([
+            monthYearStore.setMonthYear(),
             authUserStore.getAuthUser(),
             settingStore.getSetting(),
-            monthYearStore.setMonthYear(),
             dashboardStore.getReportsCount(),
             dashboardStore.getStatsCount(),
             masterDataStore.getOrgList()

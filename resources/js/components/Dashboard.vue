@@ -10,7 +10,9 @@ import { useAuthUserStore } from "../stores/AuthUserStore.js";
 import { useLoadingStore } from "../stores/LoadingStore.js";
 import { useDashboardStore } from "../stores/DashboardStore";
 import { useMonthYearStore } from "../stores/MonthYearStore.js";
+import { useScreenDisplayStore } from '../stores/ScreenDisplayStore.js';
 
+const screenDisplayStore = useScreenDisplayStore();
 const dashboardStore = useDashboardStore();
 const loadingStore = useLoadingStore();
 const monthYearStore = useMonthYearStore();
@@ -36,7 +38,7 @@ onMounted(() => {
                 <div class="col-sm-6">
                     <h1 class="m-0">Beranda</h1>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6"  v-if="!screenDisplayStore.isMobile">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Beranda</li>
@@ -50,7 +52,7 @@ onMounted(() => {
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-3 col-12">
                     <div class="small-box bg-info">
                         <div v-if="loadingStore.isLoading" class="overlay">
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
@@ -63,7 +65,7 @@ onMounted(() => {
                                     <option v-for="opt in monthYearStore.myOptions" :value="opt.id" :key="opt.id">{{ opt.text }}</option>
                                 </select>
                             </div>
-                            <p>Pekerjaan</p>
+                            <p>Laporan Kerja</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -75,7 +77,7 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-6">
+                <!-- <div class="col-lg-3 col-6">
 
                     <div class="small-box bg-success">
                         <div v-if="loadingStore.isLoading" class="overlay">
@@ -99,7 +101,7 @@ onMounted(() => {
                             <i class="fas fa-arrow-circle-right"></i>
                         </router-link>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="row">
