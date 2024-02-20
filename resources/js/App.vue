@@ -28,13 +28,15 @@ const install = async () => {
 
 watch(() => authUserStore.user.name, function () {
 
-    if(authUserStore.user.name == '') {
+    if (authUserStore.user.name == '') {
         router.push('/login');
     }
     console.log('value changes detected');
 });
 
 onMounted(() => {
+
+    screenDisplayStore.getScreenSize();
     window.addEventListener("beforeinstallprompt", e => {
         e.preventDefault();
         // Stash the event so it can be triggered later.
@@ -44,10 +46,6 @@ onMounted(() => {
         deferredPrompt.value = null;
     });
     window.addEventListener('resize', screenDisplayStore.toggleIsMobile);
-    console.log('screenDisplayStore');
-    console.log(screenDisplayStore.isMobile);
-    console.log(screenDisplayStore.sWidth);
-    console.log(screenDisplayStore.sHeight);
 
 });
 </script>
