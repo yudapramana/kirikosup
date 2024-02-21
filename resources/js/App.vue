@@ -16,6 +16,16 @@ const deferredPrompt = ref(null);
 const authUserStore = useAuthUserStore();
 const settingStore = useSettingStore();
 
+const logout = () => {
+    axios.post('/logout')
+        .then((response) => {
+            authUserStore.user.name = '';
+            router.push('/login');
+            localStorage.clear(); 
+            // getActivePinia()._s.forEach(store => store.$reset());
+        });
+};
+
 const currentThemeMode = computed(() => {
     return settingStore.theme === 'dark' ? 'dark-mode' : '';
 });
@@ -90,10 +100,22 @@ onMounted(() => {
                     <span>Laporan</span>
                 </v-btn>
 
+                <v-btn value="monitor" to="/admin/org-reports" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'ADMIN' || authUserStore.user.role == 'REVIEWER'">
+                    <v-icon>mdi-monitor</v-icon>
+
+                    <span>Monitor</span>
+                </v-btn>
+
                 <v-btn value="profile" to="/admin/profile">
                     <v-icon>mdi-account</v-icon>
 
                     <span>Profil</span>
+                </v-btn>
+
+                <v-btn value="logout" @click.prevent="logout">
+                    <v-icon>mdi-logout</v-icon>
+
+                    <span>Logout</span>
                 </v-btn>
             </v-bottom-navigation>
 

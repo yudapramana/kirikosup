@@ -81,7 +81,7 @@ onMounted(() => {
                 <div class="col-sm-6">
                     <h1 class="m-0">LCHK Satker</h1>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" v-if="!screenDisplayStore.isMobile">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">LCKH Satker</li>
@@ -208,18 +208,19 @@ onMounted(() => {
                     <!-- TRY -->
                     <div class="timeline" v-if="screenDisplayStore.isMobile">
                         <hr>
-                        <template v-for="(report, index) in reports.data">
-                            <template v-if="report.works.length > 0">
+                        <template v-if="reports.data.length > 0">
+                            <template v-for="(report, index) in reports.data">
+                                <template v-if="report.works.length > 0">
 
-                                <template v-for="(work, iSub) in report.works" :key="work.id">
-                                    <div v-if="iSub === 0" class="time-label">
-                                        <span class="bg-primary badge badge-primary badge-sm">{{
-                                            formatDateStringHuman(report.date) }}</span>
-                                    </div>
-                                    <div>
-                                        <div class="timeline-item">
-                                            <span class="time">
-                                                <!-- <router-link :to="`/admin/reports/${work.id}/edit`"
+                                    <template v-for="(work, iSub) in report.works" :key="work.id">
+                                        <div v-if="iSub === 0" class="time-label">
+                                            <span class="bg-primary badge badge-primary badge-sm">{{
+                                                formatDateStringHuman(report.date) }}</span>
+                                        </div>
+                                        <div>
+                                            <div class="timeline-item">
+                                                <span class="time">
+                                                    <!-- <router-link :to="`/admin/reports/${work.id}/edit`"
                                                     class="badge badge-info right" style="margin-right: 3px;">
                                                     Ubah
                                                 </router-link>
@@ -227,36 +228,43 @@ onMounted(() => {
                                                     @click.prevent="$event => deleteWork(index, work.id)">
                                                     Hapus
                                                 </a> -->
-                                                [{{ work.volume }} {{ work.unit }}]
-                                            </span>
-                                            <h3 class="timeline-header" style="font-size: smaller;"> <span class="time"><i
-                                                        class="fas fa-clock"></i> {{
-                                                            formatDateStringHuman(report.date) }}</span></h3>
-                                            <div class="timeline-body" style="font-size: small;">
-                                                {{ work.work_name }}<br>
-                                                <span style="font-size: smaller;">
-                                                    {{ work.work_detail }}
+                                                    [{{ work.volume }} {{ work.unit }}]
                                                 </span>
+                                                <h3 class="timeline-header" style="font-size: smaller;line-height: 1 !important;"> <span
+                                                        class="time"> {{
+                                                            formatDateStringHuman(report.date) }}</span></h3>
+                                                <div class="timeline-body" style="font-size: small; line-height: 1 !important;">
+                                                    {{ work.work_name }}<br>
+                                                    <span style="font-size: smaller;">
+                                                        {{ work.work_detail }}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </template>
                                 </template>
-                            </template>
-                            <template v-else>
-                                <div class="time-label" :key="report.id">
-                                    <span class="bg-primary badge badge-primary badge-sm">
-                                        {{ formatDateStringHuman(report.date) }}
-                                    </span>
-                                    <!-- <a class="badge badge-danger" style="margin-left: 3px;" href="#"
+                                <template v-else>
+                                    <div class="time-label" :key="report.id">
+                                        <span class="bg-primary badge badge-primary badge-sm">
+                                            {{ formatDateStringHuman(report.date) }}
+                                        </span>
+                                        <!-- <a class="badge badge-danger" style="margin-left: 3px;" href="#"
                                         @click.prevent="$event => deleteReport(index, report.id)">
                                          hapus
                                     </a> -->
-                                </div>
-                                <div :key="report.id">
-                                    .: Belum ada Data :.
-                                </div>
+                                    </div>
+                                    <div :key="report.id" class="text-center">
+                                        .: Belum ada Data :.
+                                    </div>
+                                </template>
                             </template>
                         </template>
+                        <template v-else>
+                            <div class="text-center">
+                                .: Belum ada data :.
+                            </div>
+                        </template>
+
                     </div>
                     <!-- ENDTRY -->
 
@@ -367,7 +375,7 @@ onMounted(() => {
                         </div>
                     </div>
                     <Bootstrap4Pagination :data="reports" @pagination-change-page="getReports" :limit="1" :keepLength="true"
-                        v-if="previewData" />
+                        v-if="previewData" style="margin-bottom: 100px;" />
 
 
                     <div v-if="previewPDF">
