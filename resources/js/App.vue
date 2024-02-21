@@ -76,8 +76,8 @@ onMounted(() => {
             </div>
             <SidebarRight />
             <AppFooter />
-            
-            <v-bottom-navigation  grow v-if="screenDisplayStore.isMobile">
+
+            <v-bottom-navigation grow v-if="screenDisplayStore.isMobile">
                 <v-btn value="dashboard" to="/admin/dashboard">
                     <v-icon>mdi-home</v-icon>
 
@@ -96,6 +96,12 @@ onMounted(() => {
                     <span>Profil</span>
                 </v-btn>
             </v-bottom-navigation>
+
+            <VLayoutItem model-value position="bottom" class="text-end" size="88" v-if="screenDisplayStore.isMobile">
+                <div class="ma-4">
+                    <VBtn to="/admin/reports/create" icon="mdi-plus" size="large" color="primary" elevation="8" />
+                </div>
+            </VLayoutItem>
         </v-app>
     </div>
     <div v-else class="login-page" :class="currentThemeMode">

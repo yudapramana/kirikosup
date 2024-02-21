@@ -146,7 +146,7 @@ onMounted(() => {
             <div class="row">
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-between mb-2">
-                        <div>
+                        <div v-if="!screenDisplayStore.isMobile">
                             <router-link to="/admin/reports/create">
                                 <button class="btn btn-primary">
                                     <i class="fa fa-plus-circle mr-1"></i>
@@ -157,7 +157,7 @@ onMounted(() => {
                         </div>
                         <div class="btn-group">
 
-                            <button @click="printLCKB()" type="button" class="btn btn-secondary">
+                            <button @click="printLCKB()"  class="btn btn-secondary">
                                 <span class="mr-1">Print</span>
                             </button>
 
@@ -271,17 +271,17 @@ onMounted(() => {
                                         class="fas fa-3x fa-sync-alt fa-spin"></i>
                                     <div class="text-bold pt-2">Loading...</div>
                                 </div>
-                                <table class="table table-bordered">
+                                <table class="table table-bordered" style="line-height: 1 !important;">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Tanggal</th>
-                                            <th scope="col" class="text-center">#</th>
-                                            <th scope="col" width="50%">Pekerjaan</th>
-                                            <!-- <th scope="col">Detil Kerja</th> -->
-                                            <th scope="col" class="text-right">Vol</th>
-                                            <th scope="col">Unit</th>
-                                            <th scope="col">Eviden</th>
-                                            <th scope="col">Options</th>
+                                            <th scope="col text-sm">Tanggal</th>
+                                            <th scope="col text-sm" class="text-center">#</th>
+                                            <th scope="col text-sm" width="50%">Pekerjaan</th>
+                                            <!-- <th scope="col text-sm">Detil Kerja</th> -->
+                                            <th scope="col text-sm" class="text-right">Vol</th>
+                                            <th scope="col text-sm">Unit</th>
+                                            <th scope="col text-sm">Eviden</th>
+                                            <th scope="col text-sm">Options</th>
 
                                         </tr>
                                     </thead>
@@ -292,20 +292,20 @@ onMounted(() => {
                                             <template v-if="report.works.length > 0">
 
                                                 <tr v-for="(work, iSub) in report.works" :key="work.id">
-                                                    <td v-if="iSub === 0" :rowspan="report.works.length" class="s"
+                                                    <td v-if="iSub === 0" :rowspan="report.works.length" class="s text-sm"
                                                         style="white-space: pre;">
                                                         {{ formatDateString(report.date) }}</td>
-                                                    <td class="text-center">{{ iSub + 1 }}</td>
-                                                    <td class="s">
+                                                    <td class="text-center text-sm">{{ iSub + 1 }}</td>
+                                                    <td class="s text-sm">
                                                         {{ work.work_name }} <br>
-                                                        <p class="text-muted m-0 p-0" style="font-size: small !important;">
+                                                        <p class="text-muted m-0 p-0" style="font-size:smaller !important;">
                                                             {{
                                                                 work.work_detail }}</p>
                                                     </td>
                                                     <!-- <td class="s">{{ work.work_detail }}</td> -->
-                                                    <td class="s text-right">{{ work.volume }}</td>
-                                                    <td class="s">{{ work.unit }}</td>
-                                                    <td class="s">{{ work.evidence }}</td>
+                                                    <td class="s text-right text-sm">{{ work.volume }}</td>
+                                                    <td class="s text-sm">{{ work.unit }}</td>
+                                                    <td class="s text-sm">{{ work.evidence }}</td>
                                                     <td class="text-center">
                                                         <router-link :to="`/admin/reports/${work.id}/edit`">
                                                             <i class="fa fa-edit"></i>
@@ -321,16 +321,16 @@ onMounted(() => {
 
                                             <template v-else>
                                                 <tr :key="report.id">
-                                                    <td class="s">{{
-                                                        formatDateString(report.date) }}
-                                                    </td>
-                                                    <td class="s text-center">
+                                                    <td  class="s text-sm"
+                                                        style="white-space: pre;">
+                                                        {{ formatDateString(report.date) }}</td>
+                                                    <td class="s text-center text-sm">
                                                         <a href="#"
                                                             @click.prevent="$event => deleteReport(index, report.id)">
                                                             <i class="fa fa-trash text-danger"></i>
                                                         </a>
                                                     </td>
-                                                    <td colspan="7" class="text-center">Belum ada data...</td>
+                                                    <td colspan="7" class="text-center text-sm">Belum ada data...</td>
                                                 </tr>
                                             </template>
 
