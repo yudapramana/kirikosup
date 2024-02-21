@@ -16,9 +16,9 @@ const authUserStore = useAuthUserStore();
 const logout = () => {
     axios.post('/logout')
         .then((response) => {
-            localStorage.clear(); 
             authUserStore.user.name = '';
             router.push('/login');
+            localStorage.clear(); 
             // getActivePinia()._s.forEach(store => store.$reset());
         });
 };

@@ -1,4 +1,20 @@
 {
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot": {
+    "file": "assets/materialdesignicons-webfont-TEmAk13K.eot",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.eot"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf": {
+    "file": "assets/materialdesignicons-webfont-BpRar1d5.ttf",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.ttf"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff": {
+    "file": "assets/materialdesignicons-webfont-Bvl3VxMs.woff",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff"
+  },
+  "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2": {
+    "file": "assets/materialdesignicons-webfont-B6OSyW2I.woff2",
+    "src": "node_modules/@mdi/font/fonts/materialdesignicons-webfont.woff2"
+  },
   "node_modules/admin-lte/plugins/fontawesome-free/webfonts/fa-brands-400.eot": {
     "file": "assets/fa-brands-400-DnkPfk3o.eot",
     "src": "node_modules/admin-lte/plugins/fontawesome-free/webfonts/fa-brands-400.eot"
@@ -59,16 +75,32 @@
     "file": "assets/fa-solid-900-BUswJgRo.woff2",
     "src": "node_modules/admin-lte/plugins/fontawesome-free/webfonts/fa-solid-900.woff2"
   },
+  "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.eot": {
+    "file": "assets/MaterialIcons-Regular-BjXOXp5c.eot",
+    "src": "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.eot"
+  },
+  "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.ttf": {
+    "file": "assets/MaterialIcons-Regular-DEUTIz1o.ttf",
+    "src": "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.ttf"
+  },
+  "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.woff": {
+    "file": "assets/MaterialIcons-Regular-FsbMSDLx.woff",
+    "src": "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.woff"
+  },
+  "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.woff2": {
+    "file": "assets/MaterialIcons-Regular-DOtZ65Va.woff2",
+    "src": "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.woff2"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-Bz4Lpg1C.css",
+    "file": "assets/app-BzMDckPj.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-DDxB-s4g.css"
+      "assets/app-C3ag3MQR.css"
     ],
-    "file": "assets/app-4NpIzfqb.js",
+    "file": "assets/app-BA0QfIID.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

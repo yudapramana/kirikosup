@@ -23,6 +23,15 @@ const getReports = (page = 1) => {
             console.log(response.data);
             reports.value = response.data;
             loadingStore.toggleLoading();
+        })
+        .catch((error) => {
+            console.log(error.response.data)
+            if (error.response.status === 401) {
+                authUserStore.user.name = '';
+                router.push('/login');
+                localStorage.clear(); 
+
+            }
         });
 };
 
@@ -210,7 +219,7 @@ onMounted(() => {
                                         <span class="bg-primary badge badge-primary badge-sm">{{
                                             formatDateStringHuman(report.date) }}</span>
                                     </div>
-                                    <div>
+                                    <div style="margin-bottom: 10px;">
                                         <div class="timeline-item">
                                             <span class="time">
                                                 <router-link :to="`/admin/reports/${work.id}/edit`"
@@ -225,7 +234,7 @@ onMounted(() => {
                                             <h3 class="timeline-header" style="font-size: smaller;"> <span class="time"><i
                                                         class="fas fa-clock"></i> {{
                                                             formatDateStringHuman(report.date) }}</span></h3>
-                                            <div class="timeline-body" style="font-size: small;">
+                                            <div class="timeline-body" style="font-size: small; line-height: 1 !important;">
                                                 [{{ work.volume }} {{ work.unit }}] {{ work.work_name }}<br>
                                                 <span style="font-size: smaller;">
                                                     {{ work.work_detail }}
@@ -240,7 +249,8 @@ onMounted(() => {
                                     <span class="bg-primary badge badge-primary badge-sm">
                                         {{ formatDateStringHuman(report.date) }}
                                     </span>
-                                    <a class="badge badge-danger" style="margin-left: 3px;" href="#" @click.prevent="$event => deleteReport(index, report.id)">
+                                    <a class="badge badge-danger" style="margin-left: 3px;" href="#"
+                                        @click.prevent="$event => deleteReport(index, report.id)">
                                         <!-- <i class="fa fa-trash text-danger"></i> --> hapus
                                     </a>
                                 </div>
@@ -377,5 +387,9 @@ onMounted(() => {
 .timeline>div {
     margin-bottom: 15px;
     margin-right: 0 !important;
+}
+
+.time-label {
+    margin-bottom: 5px !important;
 }
 </style>

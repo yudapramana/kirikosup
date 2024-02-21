@@ -9,6 +9,7 @@ import { useAuthUserStore } from './stores/AuthUserStore';
 import { useSettingStore } from './stores/SettingStore';
 import { useScreenDisplayStore } from './stores/ScreenDisplayStore.js';
 
+
 const router = useRouter();
 const screenDisplayStore = useScreenDisplayStore();
 const deferredPrompt = ref(null);
@@ -64,13 +65,38 @@ onMounted(() => {
     </v-app> -->
 
     <div v-if="authUserStore.user.name !== ''" class="wrapper" :class="currentThemeMode" id="app">
-        <AppNavbar />
-        <SidebarLeft />
-        <div class="content-wrapper">
-            <router-view></router-view>
-        </div>
-        <SidebarRight />
-        <AppFooter />
+
+
+        <v-app app>
+
+            <AppNavbar v-if="!screenDisplayStore.isMobile" />
+            <SidebarLeft />
+            <div class="content-wrapper">
+                <router-view></router-view>
+            </div>
+            <SidebarRight />
+            <AppFooter />
+            
+            <v-bottom-navigation  grow v-if="screenDisplayStore.isMobile">
+                <v-btn value="dashboard" to="/admin/dashboard">
+                    <v-icon>mdi-home</v-icon>
+
+                    <span>Beranda</span>
+                </v-btn>
+
+                <v-btn value="reports" to="/admin/reports">
+                    <v-icon>mdi-book</v-icon>
+
+                    <span>Laporan</span>
+                </v-btn>
+
+                <v-btn value="profile" to="/admin/profile">
+                    <v-icon>mdi-account</v-icon>
+
+                    <span>Profil</span>
+                </v-btn>
+            </v-bottom-navigation>
+        </v-app>
     </div>
     <div v-else class="login-page" :class="currentThemeMode">
         <router-view></router-view>

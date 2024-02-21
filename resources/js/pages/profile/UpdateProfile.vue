@@ -3,8 +3,9 @@ import { onMounted, reactive, ref } from 'vue';
 import { useToastr } from '@/toastr';
 import { useAuthUserStore } from '../../stores/AuthUserStore';
 import CloudImage from '../../components/CloudImage.vue';
+import { useScreenDisplayStore } from '../../stores/ScreenDisplayStore.js';
 
-
+const screenDisplayStore = useScreenDisplayStore();
 const image_cloud_id = ref('');
 const widget = window.cloudinary.createUploadWidget(
     { 
@@ -101,7 +102,7 @@ const handleFileChange = (event) => {
                 <div class="col-sm-6">
                     <h1 class="m-0">Profile</h1>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" v-if="!screenDisplayStore.isMobile">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Profile</li>

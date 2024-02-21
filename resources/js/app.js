@@ -24,7 +24,7 @@ import PrimeVue from 'primevue/config';
 import { useDashboardStore } from './stores/DashboardStore.js';
 import { useMasterDataStore } from './stores/MasterDataStore.js';
 import Select2 from 'vue3-select2-component';
-// import 'vuetify/styles'
+import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
@@ -59,7 +59,7 @@ router.beforeEach(async (to, from) => {
             masterDataStore.getOrgList()
         ]);
 
-    }
+    } 
 });
 
 app.use(pinia);
