@@ -209,7 +209,7 @@ onMounted(() => {
                     </div> -->
 
                     <!-- TRY -->
-                    <div class="timeline" v-if="screenDisplayStore.isMobile">
+                    <div class="timeline" v-if="screenDisplayStore.isMobile" :style="reports.last_page == 1 ? 'margin-bottom: 100px' : ''">
                         <hr>
                         <!-- v-if="loadingStore.isLoading" -->
                         <div class="text-center" v-if="loadingStore.isLoading">
