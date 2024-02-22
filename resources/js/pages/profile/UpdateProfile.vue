@@ -95,7 +95,7 @@ const handleFileChange = (event) => {
                 toastr.success('Image uploaded successfully!');
             });
     } else {
-        toastr.fail('Image failed to upload!');
+        toastr.error('Image failed to upload!');
     }
 };
 </script>
