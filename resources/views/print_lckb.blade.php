@@ -126,73 +126,74 @@
     </table>
 
     <span>&nbsp;</span>
+    <div style=" page-break-inside: avoid;">
+        <table class="ttdfooter" style="width:100%; page-break-inside: avoid !important; " autosize="1">
+            <tr style="page-break-inside: avoid !important;">
+                <td width="29%">Atasan langsung</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Pembuat Laporan</td>
+            </tr>
+            <tr style="page-break-inside: avoid !important;">
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><span style="font-weight: bold"><u>{{ $user->nama_pemeriksa }}</u></span><br>
+                    NIP.{{ $user->nip_pemeriksa }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td width="29%"><span style="font-weight: bold"><u>{{ $user->name }}</u></span><br>
+                    NIP.{{ $user->username }}
+                </td>
+            </tr>
 
-    <table class="ttdfooter" style="width:100%">
-        <tr>
-            <td width="29%">Atasan langsung</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>Pembuat Laporan</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><span style="font-weight: bold"><u>{{ $user->nama_pemeriksa }}</u></span><br>
-                NIP.{{ $user->nip_pemeriksa }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td width="29%"><span style="font-weight: bold"><u>{{ $user->name }}</u></span><br>
-                NIP.{{ $user->username }}
-            </td>
-        </tr>
-
-    </table>
+        </table>
+    </div>
 
 </body>
 
