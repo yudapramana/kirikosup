@@ -127,12 +127,11 @@
 
     <span>&nbsp;</span>
     <div style=" page-break-inside: avoid;">
-        <table class="ttdfooter" style="width:100%; page-break-inside: avoid !important; " autosize="1">
+        <table class="ttdfooter" style="width:100%; page-break-inside: avoid !important; font-size:10pt " autosize="1">
             <tr style="page-break-inside: avoid !important;">
                 <td width="29%">Atasan langsung</td>
                 <td></td>
-                <td></td>
-                <td></td>
+
                 <td></td>
                 <td></td>
                 <td></td>
@@ -145,23 +144,9 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td></td>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -175,19 +160,23 @@
                 <td></td>
                 <td></td>
                 <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td><span style="font-weight: bold"><u>{{ $user->nama_pemeriksa }}</u></span><br>
+                <td width="39%"><span style="font-weight: bold"><u>{{ $user->nama_pemeriksa }}</u></span><br>
                     NIP.{{ $user->nip_pemeriksa }}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td width="29%"><span style="font-weight: bold"><u>{{ $user->name }}</u></span><br>
+                <td width="39%"><span style="font-weight: bold"><u>{{ $user->name }}</u></span><br>
                     NIP.{{ $user->username }}
                 </td>
             </tr>
