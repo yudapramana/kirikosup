@@ -55,14 +55,14 @@
     </p>
 
 
-    <table style="width:100%; font-size:11pt;">
+    <table style="width:100%; font-size:10pt;">
         <tr>
             <td width="15%">NAMA / NIP</td>
-            <td>&nbsp;:&nbsp;</td>
+            <td width="3%">&nbsp;:&nbsp;</td>
             <td>
                 <p style="margin-left: 20px; padding-left:20px;">{{ $user->name }} / {{ $user->username }} </p>
             </td>
-            <td width="30%" rowspan="4" style="align-content: flex-start; align:left; vertical-align:top">Keterangan:</td>
+            <td width="20%" rowspan="4" style="align-content: flex-start; align:left; vertical-align:top">Keterangan:</td>
         </tr>
         <tr>
             <td>JABATAN</td>
@@ -80,7 +80,7 @@
 
     <span style="font-size: xx-small">&nbsp;</span>
 
-    <table style="width:100%; font-size:11pt; text-align:center">
+    <table style="width:100%; font-size:10pt; text-align:center">
         <thead>
 
             <tr style="background-color:rgb(165, 162, 162)">

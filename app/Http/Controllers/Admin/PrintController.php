@@ -15,10 +15,17 @@ class PrintController extends Controller
 {
     public function document($monthYear)
     {
+
+        $user = auth()->user();
+        if(!$user) {
+            return redirect('/admin/dashboard');
+        } elseif(!$user->nama_pemeriksa) {
+            return 'Nama dan NIP Pemeriksa belum diisi';
+        }
+
         if(!$monthYear) {
             return false;
         }
-
         $year = substr($monthYear, 0, 4);
         $month = substr($monthYear, 5, 2);
 
@@ -28,8 +35,8 @@ class PrintController extends Controller
         // Create the mPDF document
         $document = new PDF([
             'mode' => 'utf-8',
-            'format' => 'A4-L',
-            'orientation' => 'L',
+            'format' => 'A4',
+            'orientation' => $user->print_layout,
             'margin_header' => '1',
             'margin_top' => '7',
             'margin_bottom' => '7',
@@ -43,16 +50,11 @@ class PrintController extends Controller
             'Content-Disposition' => 'inline; filename="' . $documentFileName . '"'
         ];
 
-        $user = auth()->user();
-        if(!$user) {
-            return redirect('/admin/dashboard');
-        } elseif(!$user->nama_pemeriksa) {
-            return 'Nama dan NIP Pemeriksa belum diisi';
-        }
+        
         $user_id = $user->id;
         $works = Work::
         groupBy('work_name', 'unit')
-        ->selectRaw("*, sum(volume) as total_volume, GROUP_CONCAT(DISTINCT(work_detail) SEPARATOR '\r \n') as work_detail_merge")
+        ->selectRaw("*, sum(volume) as total_volume, GROUP_CONCAT(DISTINCT(work_detail) SEPARATOR '\r \n\n') as work_detail_merge")
         ->whereHas('report', function ($q) use ($user_id, $year, $month) {
             $q->where([
                 'user_id' => $user_id,

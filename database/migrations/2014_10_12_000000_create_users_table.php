@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('jabatan', 100)->nullable();
             $table->string('nama_pemeriksa', 100)->nullable();
             $table->string('nip_pemeriksa', 18)->nullable();
+            $table->enum('print_layout', ['L', 'P'])->default('L');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

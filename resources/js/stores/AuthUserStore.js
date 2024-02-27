@@ -12,6 +12,7 @@ export const useAuthUserStore = defineStore('AuthUserStore', () => {
         avatar: '',
         nama_pemeriksa: '',
         nip_pemeriksa: '',
+        print_layout: '',
         jabatan: '',
         org_name: '',
         org_id: '',

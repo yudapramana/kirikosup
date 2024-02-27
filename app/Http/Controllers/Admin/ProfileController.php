@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        return $request->user()->only(['id', 'name', 'email', 'role', 'avatar', 'nama_pemeriksa', 'nip_pemeriksa', 'jabatan', 'org_name', 'org_id']);
+        return $request->user()->only(['id', 'name', 'email', 'role', 'avatar', 'nama_pemeriksa', 'nip_pemeriksa', 'jabatan', 'org_name', 'org_id', 'print_layout']);
     }
 
     public function update(Request $request)
@@ -23,6 +23,7 @@ class ProfileController extends Controller
             'nama_pemeriksa' => ['required'],
             'nip_pemeriksa' => ['required', 'max:18'],
             'jabatan' => ['required'],
+            'print_layout' => ['required'],
         ]);
 
         $request->user()->update($validated);

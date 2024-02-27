@@ -40,6 +40,7 @@ const updateProfile = () => {
         nama_pemeriksa: authUserStore.user.nama_pemeriksa,
         nip_pemeriksa: authUserStore.user.nip_pemeriksa,
         jabatan: authUserStore.user.jabatan,
+        print_layout: authUserStore.user.print_layout,
     })
         .then((response) => {
             toastr.success('Profile updated successfully!');
@@ -203,6 +204,20 @@ const handleFileChange = (event) => {
                                                     class="form-control " id="nip_pemeriksa" placeholder="Nama Pemeriksa">
                                                 <span class="text-danger text-sm" v-if="errors && errors.nip_pemeriksa">{{
                                                     errors.nip_pemeriksa[0] }}</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="print_layout" class="col-sm-2 col-form-label">Print Layout</label>
+                                            <div class="col-sm-10">
+                                                <select v-model="authUserStore.user.print_layout" name="print_layout" id="print_layout" class="form-control">
+                                                    <option value="L">Landscape</option>
+                                                    <option value="P">Portrait</option>
+                                                </select>
+                                                <!-- <input v-model="authUserStore.user.print_layout" type="text"
+                                                    class="form-control " id="print_layout" placeholder="Nama Pemeriksa"> -->
+                                                <span class="text-danger text-sm" v-if="errors && errors.print_layout">{{
+                                                    errors.print_layout[0] }}</span>
                                             </div>
                                         </div>
 
