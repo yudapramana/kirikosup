@@ -71,12 +71,17 @@ class User extends Authenticatable
         );
     }
 
-    // public function avatar(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn($value) => asset(Storage::url($value) ?? 'noimage.png'),
-    //     );
-    // }
+    public function avatar(): Attribute
+    {
+        // return Attribute::make(
+        //     get: fn($value) => asset(Storage::url($value) ?? 'noimage.png'),
+        // );
+
+        return Attribute::make(
+            get: fn($value) => $value ?? "http://res.cloudinary.com/kemenagpessel/image/upload/v1709086972/profile_picture_pegawai/ijf9mhs8e1m2mjjgz69l.png",
+        );
+        
+    }
 
     public function org()
     {
