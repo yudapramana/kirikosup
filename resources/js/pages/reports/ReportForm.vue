@@ -134,7 +134,7 @@ onMounted(() => {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card" style="margin-bottom: 100px">
                         <div class="card-body">
                             <Form @submit="handleSubmit" v-slot:default="{ errors }">
                                 <div class="row">

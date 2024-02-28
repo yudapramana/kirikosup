@@ -120,7 +120,7 @@ const handleFileChange = (event) => {
 
     <div class="content">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row" style="margin-bottom: 100px;">
                 <div class="col-md-3">
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
