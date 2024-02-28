@@ -6,8 +6,13 @@ import { useAuthUserStore } from '../../stores/AuthUserStore';
 
 const authUserStore = useAuthUserStore();
 const router = useRouter();
+// const form = reactive({
+//     email: '',
+//     password: ''
+// });
+
 const form = reactive({
-    email: '',
+    username: '',
     password: ''
 });
 
@@ -34,18 +39,33 @@ const handleSubmit = () => {
 <template>
     <div class="login-box">
 
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
+        <div class="login-logo">
+            <img src="http://res.cloudinary.com/kemenagpessel/image/upload/q_5,f_avif/v1709127976/profile_picture_pegawai/ssxz4kds0op8iygxosrf.png" alt="logo Ekin" width="100%">
+            <!-- <a href="../../index2.html"><b>Admin</b>LTE</a> -->
+        </div>
+
+        <div class="card card-outline card-success">
+            
+            <!-- <div class="card-header text-center">
                 <a href="#" class="h1"><b>Laporan</b> Kinerja</a>
-            </div>
-            <div class="card-body">
-                <p class="login-box-msg">Kementerian Agama Kab. Pesisir Selatan</p>
+            </div> -->
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Silahkan Masuk untuk memulai sesi</p>
                 <div v-if="errorMessage" class="alert alert-danger" role="alert">
                     {{ errorMessage }}
                 </div>
                 <form @submit.prevent="handleSubmit">
-                    <div class="input-group mb-3">
+                    <!-- <div class="input-group mb-3">
                         <input v-model="form.email" type="email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="input-group mb-3">
+                        <input v-model="form.username" type="text" class="form-control" placeholder="NIP Anda">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -65,7 +85,7 @@ const handleSubmit = () => {
                             <div class="icheck-primary">
                                 <input type="checkbox" id="remember" checked>
                                 <label for="remember">
-                                   &nbsp; Remember Me
+                                    &nbsp; Remember Me
                                 </label>
                             </div>
                         </div>
@@ -84,10 +104,17 @@ const handleSubmit = () => {
                 </form>
 
                 <p class="mb-1">
-                    <a href="#">Lupa Password?  <br> Hubungi Admin Satker</a>
+                    <a href="#">Lupa Password? <br> Hubungi Admin Satker</a>
                 </p>
             </div>
 
         </div>
     </div>
 </template>
+
+<style>
+.login-logo {
+    margin-top: -50px !important;
+    margin-bottom: 0px !important;
+}
+</style>

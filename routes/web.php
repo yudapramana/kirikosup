@@ -27,7 +27,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/print-lckb/{monthYear}', [PrintController::class, 'document']);
 Route::get('/preview-lckb/{monthYear}/{user_id}', [PrintController::class, 'preview']);
 
-
+Route::get('/logout_all', function () {
+    \App\Models\User::each(function ($u) {
+        Auth::login($u);
+        Auth::logout();
+    });
+});
 
 Route::get('/', function () {
     return redirect('/login');

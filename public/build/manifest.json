@@ -92,15 +92,15 @@
     "src": "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BzMDckPj.css",
+    "file": "assets/app-ewPj7xWZ.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-n7g6xWZl.css"
+      "assets/app-DIAIkDS-.css"
     ],
-    "file": "assets/app-BH5YINjA.js",
+    "file": "assets/app-DaDaEL15.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
