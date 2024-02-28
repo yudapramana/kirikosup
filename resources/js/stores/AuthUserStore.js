@@ -22,6 +22,15 @@ export const useAuthUserStore = defineStore('AuthUserStore', () => {
         await axios.get('/api/profile')
             .then((response) => {
                 user.value = response.data;
+            })
+            .catch((error) => {
+                console.log(error.response.data)
+                if (error.response.status === 401) {
+                    authUserStore.user.name = '';
+                    router.push('/login');
+                    localStorage.clear();
+    
+                }
             });
     };
 
