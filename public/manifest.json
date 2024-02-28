@@ -1,7 +1,7 @@
 {
     "name": "EKIN KEMENAG",
     "short_name": "Laporan Kinerja",
-    "start_url": "/index.php",
+    "start_url": "/",
     "background_color": "#29741D",
     "description": "Laporan Kinerja Kementerian Agama Kabupaten Pesisir Selatan",
     "display": "fullscreen",
