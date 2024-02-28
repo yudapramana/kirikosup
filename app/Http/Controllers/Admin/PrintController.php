@@ -103,14 +103,17 @@ class PrintController extends Controller
         $year = substr($monthYear, 0, 4);
         $month = substr($monthYear, 5, 2);
 
+        $user = User::find($user_id);
+        $user_id = $user->id;
+
         // Setup a filename
         $documentFileName = "fun.pdf";
 
         // Create the mPDF document
         $document = new PDF([
             'mode' => 'utf-8',
-            'format' => 'A4-L',
-            'orientation' => 'L',
+            'format' => 'A4',
+            'orientation' => $user->print_layout,
             'margin_header' => '3',
             'margin_top' => '10',
             'margin_bottom' => '10',
@@ -124,8 +127,7 @@ class PrintController extends Controller
             'Content-Disposition' => 'inline; filename="' . $documentFileName . '"'
         ];
 
-        $user = User::find($user_id);
-        $user_id = $user->id;
+        
 
         // if(!$user->nama_pemeriksa) {
         //     return 'Nama dan NIP Pemeriksa belum diisi';

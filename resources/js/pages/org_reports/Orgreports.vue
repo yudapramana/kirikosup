@@ -206,7 +206,7 @@ onMounted(() => {
 
 
                     <!-- TRY -->
-                    <div class="timeline" v-if="screenDisplayStore.isMobile">
+                    <div class="timeline" v-if="previewData && screenDisplayStore.isMobile">
                         <hr>
                         <template v-if="reports.data.length > 0">
                             <template v-for="(report, index) in reports.data">
