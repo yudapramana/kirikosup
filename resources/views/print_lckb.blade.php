@@ -129,7 +129,7 @@
     <div style=" page-break-inside: avoid;">
         <table class="ttdfooter" style="width:100%; page-break-inside: avoid !important; font-size:10pt " autosize="1">
             <tr style="page-break-inside: avoid !important;">
-                <td width="29%">Atasan langsung</td>
+                <td width="29%"> {{ $user->nama_pemeriksa != '-' ? 'Atasan langsung' : '' }}</td>
                 <td></td>
 
                 <td></td>
@@ -170,8 +170,8 @@
                 <td></td>
             </tr>
             <tr>
-                <td width="39%"><span style="font-weight: bold"><u>{{ $user->nama_pemeriksa }}</u></span><br>
-                    NIP.{{ $user->nip_pemeriksa }}</td>
+                <td width="39%"><span style="font-weight: bold"><u>{{ $user->nama_pemeriksa != '-' ? $user->nama_pemeriksa : '' }}</u></span><br>
+                    {{ $user->nama_pemeriksa != '-' ? 'NIP.' . $user->nip_pemeriksa : '' }}</td>
                 <td></td>
                 <td></td>
                 <td></td>

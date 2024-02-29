@@ -4,7 +4,8 @@ import { ref } from 'vue';
 import { useLoadingStore } from "./LoadingStore";
 import { useMonthYearStore } from "./MonthYearStore.js";
 import { useStorage } from '@vueuse/core';
-
+import { useRouter, useRoute } from 'vue-router';
+import { useAuthUserStore } from "./AuthUserStore.js";
 
 export const useMasterDataStore = defineStore('MasterDataStore', () => {
     const orgId = useStorage('MasterDataStore:orgId', ref(''));
@@ -15,23 +16,44 @@ export const useMasterDataStore = defineStore('MasterDataStore', () => {
 
 
     const loadingStore = useLoadingStore();
+    const router = useRouter();
+    const authUserStore = useAuthUserStore();
 
     const getOrgList = async () => {
-        loadingStore.toggleLoading();
-        await axios.get('/api/master', {
-            params: {
-                type: 'orgs',
-            }
-        })
-            .then((response) => {
-                orgList.value = response.data.data;
-                loadingStore.toggleLoading();
-            });
+
+        // console.log('orgList.value.length');
+        // console.log(orgList.value.length);
+
+        if (orgList.value.length == 0) {
+            loadingStore.toggleLoading();
+            await axios.get('/api/master', {
+                params: {
+                    type: 'orgs',
+                }
+            })
+                .then((response) => {
+                    orgList.value = response.data.data;
+                    loadingStore.toggleLoading();
+                }).catch((error) => {
+                    loadingStore.toggleLoading();
+
+                    // console.log(error.response.data)
+                    if (error.response.status === 401) {
+
+                        authUserStore.user.name = '';
+                        router.push('/login');
+                        localStorage.clear();
+
+                    }
+                });
+        }
+
+
     };
 
     const getUserList = async (org) => {
-        console.log('orgId');
-        console.log(org);
+        // console.log('orgId');
+        // console.log(org);
 
         loadingStore.toggleLoading();
         await axios.get('/api/master', {
@@ -43,11 +65,21 @@ export const useMasterDataStore = defineStore('MasterDataStore', () => {
             .then((response) => {
                 userList.value = response.data.data;
                 loadingStore.toggleLoading();
+            }).catch((error) => {
+                loadingStore.toggleLoading();
+                // console.log(error.response.data)
+                if (error.response.status === 401) {
+
+                    authUserStore.user.name = '';
+                    router.push('/login');
+                    localStorage.clear();
+
+                }
             });
     };
 
     const getUserListbyOrgID = async (orgId) => {
-        console.log('orgId');
+        // console.log('orgId');
 
         loadingStore.toggleLoading();
         await axios.get('/api/master', {
@@ -59,8 +91,18 @@ export const useMasterDataStore = defineStore('MasterDataStore', () => {
             .then((response) => {
                 userList.value = response.data.data;
                 loadingStore.toggleLoading();
+            }).catch((error) => {
+                loadingStore.toggleLoading();
+                // console.log(error.response.data)
+                if (error.response.status === 401) {
+
+                    authUserStore.user.name = '';
+                    router.push('/login');
+                    localStorage.clear();
+
+                }
             });
     };
 
-    return { orgId, userId,  orgList, userList, getOrgList, getUserList, getUserListbyOrgID };
+    return { orgId, userId, orgList, userList, getOrgList, getUserList, getUserListbyOrgID };
 });

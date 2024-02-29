@@ -36,11 +36,21 @@
     <link rel="apple-touch-icon" href="{{ asset('app_logo.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
+    <style>
+        [v-cloak]>* {
+            display: none
+        }
+
+        [v-cloak]::before {
+            content: "Loading…";
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
 
-    <div id="app"></div>
+    <div id="app" v-cloak></div>
 
 
 

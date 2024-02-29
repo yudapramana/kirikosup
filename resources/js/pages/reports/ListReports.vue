@@ -20,12 +20,12 @@ const getReports = (page = 1) => {
     loadingStore.toggleLoading();
     axios.get(`/api/reports?monthyear=${mySelected.value}&page=${page}`)
         .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             reports.value = response.data;
             loadingStore.toggleLoading();
         })
         .catch((error) => {
-            console.log(error.response.data)
+            // console.log(error.response.data)
             if (error.response.status === 401) {
                 authUserStore.user.name = '';
                 router.push('/login');
@@ -102,7 +102,7 @@ const myOptions = ref([
 ]);
 
 const myChangeEvent = () => {
-    console.log(mySelected.value);
+    // console.log(mySelected.value);
     getReports();
 };
 
@@ -118,7 +118,7 @@ const printLCKB = () => {
 }
 
 onMounted(() => {
-    console.log(mySelected.value);
+    // console.log(mySelected.value);
     getReports();
 });
 </script>

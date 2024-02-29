@@ -16,7 +16,7 @@ export const useDashboardStore = defineStore('DashboardStore', () => {
 
     const getReportsCount = async () => {
         loadingStore.toggleLoading();
-        console.log(monthYearStore.mySelected);
+        // console.log(monthYearStore.mySelected);
         await axios.get('/api/stats/reports', {
             params: {
                 monthyear: monthYearStore.mySelected,
@@ -30,7 +30,7 @@ export const useDashboardStore = defineStore('DashboardStore', () => {
     };
 
     const getStatsCount = () => {
-        console.log(monthYearStore.mySelected);
+        // console.log(monthYearStore.mySelected);
         loadingStore.toggleLoading();
         axios.get('/api/stats/all', {
             params: {
@@ -39,7 +39,7 @@ export const useDashboardStore = defineStore('DashboardStore', () => {
         })
             .then((response) => {
                 reportCompletion.value = response.data.reportCompletion;
-                console.log(response.data.reportCompletion);
+                // console.log(response.data.reportCompletion);
                 loadingStore.toggleLoading();
             });
     };

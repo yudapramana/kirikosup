@@ -49,6 +49,14 @@ const getReports = (page = 1) => {
             previewData.value = true;
             previewPDF.value = false;
             loading.value = false;
+        }).catch((error) => {
+            console.log(error.response.data)
+            if (error.response.status === 401) {
+                authUserStore.user.name = '';
+                router.push('/login');
+                localStorage.clear();
+
+            }
         });
 };
 

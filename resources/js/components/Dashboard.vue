@@ -16,7 +16,7 @@ const screenDisplayStore = useScreenDisplayStore();
 const dashboardStore = useDashboardStore();
 const loadingStore = useLoadingStore();
 const monthYearStore = useMonthYearStore();
-
+const authUserStore = useAuthUserStore();
 
 
 const getSummary = () => {
@@ -52,7 +52,7 @@ onMounted(() => {
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-12">
+                <div class="col-lg-3 col-12 col-md-4">
                     <div class="small-box bg-info">
                         <div v-if="loadingStore.isLoading" class="overlay">
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
@@ -104,7 +104,7 @@ onMounted(() => {
                 </div> -->
             </div>
 
-            <div class="row">
+            <div class="row" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'ADMIN' || authUserStore.user.role == 'REVIEWER'">
                 <div class="col-md-12">
                     <div class="card">
 

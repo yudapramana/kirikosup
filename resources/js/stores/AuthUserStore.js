@@ -16,22 +16,27 @@ export const useAuthUserStore = defineStore('AuthUserStore', () => {
         jabatan: '',
         org_name: '',
         org_id: '',
+        username: '',
     }));
-    
+
     const getAuthUser = async () => {
-        await axios.get('/api/profile')
-            .then((response) => {
-                user.value = response.data;
-            })
-            .catch((error) => {
-                console.log(error.response.data)
-                if (error.response.status === 401) {
-                    authUserStore.user.name = '';
-                    router.push('/login');
-                    localStorage.clear();
-    
-                }
-            });
+        // console.log('user.value.name');
+        // console.log(user.value.name);
+
+        if (user.value.name == '') {
+            await axios.get('/api/profile')
+                .then((response) => {
+                    user.value = response.data;
+                })
+                .catch((error) => {
+                    // console.log(error.response.data)
+                    if (error.response.status === 401) {
+                        authUserStore.user.name = '';
+                        router.push('/login');
+                        localStorage.clear();
+                    }
+                });
+        }
     };
 
     return { user, getAuthUser };

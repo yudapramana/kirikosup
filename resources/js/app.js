@@ -59,9 +59,7 @@ router.beforeEach(async (to, from) => {
             masterDataStore.getOrgList()
         ]);
 
-    } else {
-        authUserStore.getAuthUser();
-    }
+    } 
 });
 
 app.use(pinia);
