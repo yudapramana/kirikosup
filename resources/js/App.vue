@@ -96,7 +96,7 @@ onMounted(() => {
 
         <v-app app>
 
-            <AppNavbar v-if="!screenDisplayStore.isMobile" />
+            <AppNavbar  />
             <SidebarLeft />
             <div class="content-wrapper">
                 <router-view></router-view>
