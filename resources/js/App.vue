@@ -138,8 +138,8 @@ onMounted(() => {
             </v-bottom-navigation>
 
             <VLayoutItem model-value position="bottom" class="text-end" size="88"
-                v-if="screenDisplayStore.isMobile && authUserStore.user.name !== ''">
-                <div class="ma-4" v-if="route.name == 'admin.reports'">
+                v-if="screenDisplayStore.isMobile && authUserStore.user.name !== '' && route.name == 'admin.reports'">
+                <div class="ma-4">
                     <VBtn to="/admin/reports/create" icon="mdi-plus" size="large" color="primary" elevation="8" />
                 </div>
             </VLayoutItem>
