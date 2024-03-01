@@ -104,7 +104,7 @@ onMounted(() => {
                 </div> -->
             </div>
 
-            <div class="row" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'ADMIN' || authUserStore.user.role == 'REVIEWER'">
+            <div class="row" v-if="authUserStore.user.role == 'SUPERADMIN'">
                 <div class="col-md-12">
                     <div class="card">
 

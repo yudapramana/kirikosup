@@ -52,6 +52,16 @@ const updateProfile = () => {
         });
 };
 
+const logout = () => {
+    axios.post('/logout')
+        .then((response) => {
+            authUserStore.user.name = '';
+            router.push('/login');
+            localStorage.clear(); 
+            // getActivePinia()._s.forEach(store => store.$reset());
+        });
+};
+
 const changePasswordForm = reactive({
     currentPassword: '',
     password: '',
@@ -210,7 +220,8 @@ const handleFileChange = (event) => {
                                         <div class="form-group row">
                                             <label for="print_layout" class="col-sm-2 col-form-label">Print Layout</label>
                                             <div class="col-sm-10">
-                                                <select v-model="authUserStore.user.print_layout" name="print_layout" id="print_layout" class="form-control">
+                                                <select v-model="authUserStore.user.print_layout" name="print_layout"
+                                                    id="print_layout" class="form-control">
                                                     <option value="L">Landscape</option>
                                                     <option value="P">Portrait</option>
                                                 </select>
@@ -274,8 +285,11 @@ const handleFileChange = (event) => {
                             </div>
                         </div>
                     </div>
+                    <button @click.prevent="logout" type="button" class="btn btn-danger btn-block"><i class="fas fa-sign-out-alt"></i> Logout</button>
+
                 </div>
             </div>
+
 
         </div>
     </div>
@@ -285,4 +299,5 @@ const handleFileChange = (event) => {
 .profile-user-img:hover {
     background-color: blue;
     cursor: pointer;
-}</style>
+}
+</style>

@@ -1,5 +1,5 @@
 <script setup>
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { ref, onMounted, computed, watch } from 'vue';
 import AppNavbar from './components/AppNavbar.vue';
 import SidebarLeft from './components/SidebarLeft.vue';
@@ -10,6 +10,7 @@ import { useSettingStore } from './stores/SettingStore';
 import { useScreenDisplayStore } from './stores/ScreenDisplayStore.js';
 
 
+const route = useRoute();
 const router = useRouter();
 const screenDisplayStore = useScreenDisplayStore();
 const deferredPrompt = ref(null);
@@ -21,7 +22,7 @@ const logout = () => {
         .then((response) => {
             authUserStore.user.name = '';
             router.push('/login');
-            localStorage.clear(); 
+            localStorage.clear();
             // getActivePinia()._s.forEach(store => store.$reset());
         });
 };
@@ -37,13 +38,19 @@ const install = async () => {
     deferredPrompt.prompt();
 }
 
-watch(() => authUserStore.user.name, function () {
+watch(() => [authUserStore.user.name, route.name], function () {
 
     if (authUserStore.user.name == '') {
         router.push('/login');
     }
     console.log('value changes detected');
+    console.log(route.name);
+
 });
+
+const backbuttonHandler = () => {
+    navigator.app.exitApp() 
+};
 
 onMounted(() => {
 
@@ -57,6 +64,16 @@ onMounted(() => {
         deferredPrompt.value = null;
     });
     window.addEventListener('resize', screenDisplayStore.toggleIsMobile);
+
+    window.onpopstate = event => {
+        console.log('back button');
+        navigator.app.exitApp() 
+        // if (route.path == "/login") {
+        //     router.push("/admin/dashboard"); // redirect to home, for example
+        // }
+    };
+
+    document.addEventListener('backbutton', backbuttonHandler, false);
 
 });
 </script>
@@ -100,7 +117,8 @@ onMounted(() => {
                     <span>Laporan</span>
                 </v-btn>
 
-                <v-btn value="monitor" to="/admin/org-reports" v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'ADMIN' || authUserStore.user.role == 'REVIEWER'">
+                <v-btn value="monitor" to="/admin/org-reports"
+                    v-if="authUserStore.user.role == 'SUPERADMIN' || authUserStore.user.role == 'ADMIN' || authUserStore.user.role == 'REVIEWER'">
                     <v-icon>mdi-monitor</v-icon>
 
                     <span>Monitor</span>
@@ -112,15 +130,16 @@ onMounted(() => {
                     <span>Profil</span>
                 </v-btn>
 
-                <v-btn value="logout" @click.prevent="logout">
+                <!-- <v-btn value="logout" @click.prevent="logout">
                     <v-icon>mdi-logout</v-icon>
 
                     <span>Logout</span>
-                </v-btn>
+                </v-btn> -->
             </v-bottom-navigation>
 
-            <VLayoutItem model-value position="bottom" class="text-end" size="88" v-if="screenDisplayStore.isMobile && authUserStore.user.name !== ''">
-                <div class="ma-4">
+            <VLayoutItem model-value position="bottom" class="text-end" size="88"
+                v-if="screenDisplayStore.isMobile && authUserStore.user.name !== ''">
+                <div class="ma-4" v-if="route.name == 'admin.reports'">
                     <VBtn to="/admin/reports/create" icon="mdi-plus" size="large" color="primary" elevation="8" />
                 </div>
             </VLayoutItem>
