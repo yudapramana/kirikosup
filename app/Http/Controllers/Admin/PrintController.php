@@ -54,7 +54,7 @@ class PrintController extends Controller
         $user_id = $user->id;
         $works = Work::
         groupBy('work_name', 'unit')
-        ->selectRaw("*, sum(volume) as total_volume, GROUP_CONCAT(DISTINCT(work_detail) SEPARATOR '\r \n\n') as work_detail_merge")
+        ->selectRaw("*, sum(volume) as total_volume, GROUP_CONCAT(DISTINCT(work_detail) SEPARATOR '\r \n') as work_detail_merge")
         ->whereHas('report', function ($q) use ($user_id, $year, $month) {
             $q->where([
                 'user_id' => $user_id,
