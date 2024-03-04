@@ -209,7 +209,8 @@ onMounted(() => {
                     </div> -->
 
                     <!-- TRY -->
-                    <div class="timeline" v-if="screenDisplayStore.isMobile" :style="reports.last_page == 1 ? 'margin-bottom: 100px' : ''">
+                    <div class="timeline" v-if="screenDisplayStore.isMobile"
+                        :style="reports.last_page == 1 ? 'margin-bottom: 100px' : ''">
                         <hr>
                         <!-- v-if="loadingStore.isLoading" -->
                         <div class="text-center" v-if="loadingStore.isLoading">
@@ -224,8 +225,10 @@ onMounted(() => {
 
                                     <template v-for="(work, iSub) in report.works" :key="work.id">
                                         <div v-if="iSub === 0" class="time-label">
-                                            <span class="bg-primary badge badge-primary badge-sm">{{
-                                                formatDateStringHuman(report.date) }}</span>
+                                            <span class="bg-primary badge badge-primary badge-sm">
+                                                {{
+                                                    formatDateStringHuman(report.date) }}
+                                            </span>
                                         </div>
                                         <div style="margin-bottom: 10px;">
                                             <div class="timeline-item">
@@ -239,15 +242,31 @@ onMounted(() => {
                                                         Hapus
                                                     </a>
                                                 </span>
-                                                <h3 class="timeline-header" style="font-size: smaller;line-height: 1 !important;"> <span
+                                                <h3 class="timeline-header"
+                                                    style="font-size: smaller;line-height: 1 !important;"> <span
                                                         class="time"> {{
-                                                            formatDateStringHuman(report.date) }}</span></h3>
+                                                            formatDateStringHuman(report.date) }}
+                                                    </span></h3>
                                                 <div class="timeline-body"
                                                     style="font-size: small; line-height: 1 !important;">
                                                     [{{ work.volume }} {{ work.unit }}] {{ work.work_name }}<br>
                                                     <span style="font-size: smaller;">
                                                         {{ work.work_detail }}
-                                                    </span>
+                                                    </span><br>
+                                                    <div style="text-align: right;">
+
+                                                        <span style="font-size: smaller; width:100%">
+                                                            Bukti Dukung 
+                                                            <template v-if="work.evidence_url">
+                                                                <a target="blank" :href="work.evidence_url ?? '#'">
+                                                                    [ {{
+                                                                        work.evidence }} ]</a>
+                                                            </template>
+                                                            <template v-else>
+                                                                [ {{ work.evidence }} ]
+                                                            </template>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -322,12 +341,13 @@ onMounted(() => {
                                                     <td class="s text-sm">{{ work.unit }}</td>
                                                     <td class="s text-sm">
                                                         <template v-if="work.evidence_url">
-                                                            <a target="blank" :href="work.evidence_url ?? '#'">{{ work.evidence }}</a>
+                                                            <a target="blank" :href="work.evidence_url ?? '#'">{{
+                                                                work.evidence }}</a>
                                                         </template>
                                                         <template v-else>
                                                             {{ work.evidence }}
                                                         </template>
-                                                        
+
                                                     </td>
                                                     <td class="text-center">
                                                         <router-link :to="`/admin/reports/${work.id}/edit`">

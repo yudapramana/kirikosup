@@ -245,7 +245,21 @@ onMounted(() => {
                                                     {{ work.work_name }}<br>
                                                     <span style="font-size: smaller;">
                                                         {{ work.work_detail }}
-                                                    </span>
+                                                    </span><br>
+                                                    <div style="text-align: right;">
+
+                                                        <span style="font-size: smaller; width:100%">
+                                                            Bukti Dukung 
+                                                            <template v-if="work.evidence_url">
+                                                                <a target="blank" :href="work.evidence_url ?? '#'">
+                                                                    [ {{
+                                                                        work.evidence }} ]</a>
+                                                            </template>
+                                                            <template v-else>
+                                                                [ {{ work.evidence }} ]
+                                                            </template>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
