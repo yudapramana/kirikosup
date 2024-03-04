@@ -320,7 +320,15 @@ onMounted(() => {
                                                     <!-- <td class="s">{{ work.work_detail }}</td> -->
                                                     <td class="s text-right text-sm">{{ work.volume }}</td>
                                                     <td class="s text-sm">{{ work.unit }}</td>
-                                                    <td class="s text-sm">{{ work.evidence }}</td>
+                                                    <td class="s text-sm">
+                                                        <template v-if="work.evidence_url">
+                                                            <a target="blank" :href="work.evidence_url ?? '#'">{{ work.evidence }}</a>
+                                                        </template>
+                                                        <template v-else>
+                                                            {{ work.evidence }}
+                                                        </template>
+                                                        
+                                                    </td>
                                                     <td class="text-center">
                                                         <router-link :to="`/admin/reports/${work.id}/edit`">
                                                             <i class="fa fa-edit"></i>

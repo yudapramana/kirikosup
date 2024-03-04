@@ -19,6 +19,8 @@ const form = reactive({
     work_detail: '',
     volume: 0,
     unit: '',
+    evidence: '',
+    evidence_url: '',
 });
 const editReportUserID = ref('');
 
@@ -82,6 +84,8 @@ const getReport = () => {
                 form.volume = response.data.volume;
                 form.unit = response.data.unit_value;
                 form.evidence = response.data.evidence;
+                form.evidence_url = response.data.evidence_url;
+
             }
         });
 };
@@ -158,9 +162,12 @@ onMounted(() => {
                                 </div>
                                 <div class="form-group">
                                     <label for="work_detail">Deskripsi Tugas (Opsional)</label>
-                                    <textarea v-model="form.work_detail" class="form-control"
+                                    <input v-model="form.work_detail" type="text" class="form-control"
+                                                :class="{ 'is-invalid': errors.work_detail }" id="work_detail"
+                                                placeholder="Masukkan deskripsi tugas...">
+                                    <!-- <textarea v-model="form.work_detail" class="form-control"
                                         :class="{ 'is-invalid': errors.work_detail }" id="work_detail" rows="3"
-                                        placeholder="Masukkan deskripsi tugas..."></textarea>
+                                        placeholder="Masukkan deskripsi tugas..."></textarea> -->
                                     <span class="invalid-feedback">{{ errors.work_detail }}</span>
                                 </div>
                                 <div class="row">
@@ -196,11 +203,19 @@ onMounted(() => {
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="evidence">Bukti Dukung</label>
+                                    <label for="evidence">Nama Bukti Dukung</label>
                                     <input v-model="form.evidence" type="text" class="form-control"
                                         :class="{ 'is-invalid': errors.evidence }" id="evidence"
-                                        placeholder="Masukkan Bukti Dokumen...">
+                                        placeholder="Nama Bukti, Ex: Dokumentasi Foto">
                                     <span class="invalid-feedback">{{ errors.evidence }}</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="evidence_url">Link Bukti Dukung (Opsional)</label>
+                                    <textarea v-model="form.evidence_url" class="form-control"
+                                        :class="{ 'is-invalid': errors.evidence_url }" id="evidence_url" rows="3"
+                                        placeholder="Link Bukti, Ex: https://drive.google.com/file/d/x65t7...dst"></textarea>
+                                    <span class="invalid-feedback">{{ errors.evidence_url }}</span>
                                 </div>
 
 

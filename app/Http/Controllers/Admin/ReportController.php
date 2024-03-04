@@ -56,7 +56,8 @@ class ReportController extends Controller
             'work_detail' => 'sometimes',
             'volume'    => 'required|numeric|min:1',
             'unit'  => 'required',
-            'evidence' => 'required'
+            'evidence' => 'required',
+            'evidence_url' => 'sometimes',
         ]);
 
 
@@ -87,6 +88,7 @@ class ReportController extends Controller
         $work->volume = $validated['volume'];
         $work->unit = $validated['unit'];
         $work->evidence = $validated['evidence'];
+        $work->evidence_url = $validated['evidence_url'];
         $work->save();
 
         return response()->json(['message' => 'Laporan kerja sukses dibuat!']);
@@ -107,7 +109,8 @@ class ReportController extends Controller
             'work_detail' => 'required',
             'volume'    => 'required|numeric|min:1',
             'unit'  => 'required',
-            'evidence' => 'required'
+            'evidence' => 'required',
+            'evidence_url' => 'sometimes',
         ]);
 
 
@@ -133,6 +136,7 @@ class ReportController extends Controller
         $work->volume = $validated['volume'];
         $work->unit = $validated['unit'];
         $work->evidence = $validated['evidence'];
+        $work->evidence_url = $validated['evidence_url'];
         $work->save();
 
         return response()->json(['success' => true]);

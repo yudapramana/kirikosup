@@ -13,7 +13,8 @@ const router = useRouter();
 
 const form = reactive({
     username: '',
-    password: ''
+    password: '',
+    remember: true,
 });
 
 const loading = ref(false);
@@ -83,7 +84,7 @@ const handleSubmit = () => {
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember" checked>
+                                <input type="checkbox" id="remember" checked v-model="form.remember">
                                 <label for="remember">
                                     &nbsp; Remember Me
                                 </label>
