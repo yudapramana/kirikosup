@@ -56,7 +56,8 @@ class User extends Authenticatable
     protected $appends = [
         'formatted_created_at',
         'org_id',
-        'org_name'
+        'org_name',
+        'nip_name'
     ];
 
     public function getFormattedCreatedAtAttribute()
@@ -96,5 +97,10 @@ class User extends Authenticatable
     public function getOrgIdAttribute()
     {
         return $this->org ? $this->org->id : '-';
+    }
+
+    public function getNipNameAttribute()
+    {
+        return $this->username . ' - ' . $this->name;
     }
 }

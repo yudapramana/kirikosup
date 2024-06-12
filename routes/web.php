@@ -42,6 +42,17 @@ Route::get('/get-password', function () {
     return bcrypt('12345678');
 });
 
+Route::get('/all-users', function () {
+    $users = \App\Models\User::all()->pluck('nip_name');
+    
+    $html = '';
+    foreach ($users as $user) {
+        $html .= $user . '<br>';
+    }
+
+    return $html;
+});
+
 Route::middleware('auth')->group(function() {
 
     Route::get('/api/master', [MasterController::class, 'index']);
