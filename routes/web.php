@@ -43,17 +43,30 @@ Route::get('/get-password', function () {
 });
 
 Route::get('/all-users', function () {
-    $users = \App\Models\User::all()->pluck('nip_name');
-    
+    $users = \App\Models\User::all()->pluck('nip_name')->sort();
+    // $users = $users->toArray();
+    // return $users;
+
     $html = '';
     foreach ($users as $user) {
-        $html .= $user . '<br>';
+
+        $bod = substr($user, 0, 8);
+        $dob = DateTime::createFromFormat('Ymd', $bod);
+        // return $ymd;
+        $today   = new DateTime('today');
+        $year = $dob->diff($today)->y;
+        $month = $dob->diff($today)->m;
+        $day = $dob->diff($today)->d;
+
+        $tgllahir = $year." tahun"." ".sprintf('%02d', $month)." bulan"." ".sprintf('%02d', $day)." hari";
+
+        $html .= $tgllahir . '    -    ' .$user . '<br>';
     }
 
     return $html;
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
 
     Route::get('/api/master', [MasterController::class, 'index']);
 
@@ -78,7 +91,7 @@ Route::middleware('auth')->group(function() {
     Route::delete('/api/users/{user}', [UserController::class, 'destroy']);
     Route::patch('/api/users/{user}/change-role', [UserController::class, 'changeRole']);
     Route::delete('/api/users', [UserController::class, 'bulkDelete']);
-    
+
     Route::get('/api/reports', [ReportController::class, 'index']);
     Route::post('/api/reports/create', [ReportController::class, 'store']);
     Route::get('/api/reports/{work}/edit', [ReportController::class, 'edit']);
