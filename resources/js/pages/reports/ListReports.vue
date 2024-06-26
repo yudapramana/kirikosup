@@ -88,6 +88,18 @@ const mySelected = useStorage('SettingStore:mySelected', ref(''));
 
 const myOptions = ref([
     {
+        text: moment().subtract(5, 'months').format('MMMM  YYYY'),
+        id: moment().subtract(5, 'months').format('YYYY-MM')
+    },
+    {
+        text: moment().subtract(4, 'months').format('MMMM  YYYY'),
+        id: moment().subtract(4, 'months').format('YYYY-MM')
+    },
+    {
+        text: moment().subtract(3, 'months').format('MMMM  YYYY'),
+        id: moment().subtract(3, 'months').format('YYYY-MM')
+    },
+    {
         text: moment().subtract(2, 'months').format('MMMM  YYYY'),
         id: moment().subtract(2, 'months').format('YYYY-MM')
     },
@@ -204,9 +216,9 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </template>
-                        </template>
+</template>
 
-                    </div> -->
+</div> -->
 
                     <!-- TRY -->
                     <div class="timeline" v-if="screenDisplayStore.isMobile"
@@ -227,7 +239,7 @@ onMounted(() => {
                                         <div v-if="iSub === 0" class="time-label">
                                             <span class="bg-primary badge badge-primary badge-sm">
                                                 {{
-                                                    formatDateStringHuman(report.date) }}
+                    formatDateStringHuman(report.date) }}
                                             </span>
                                         </div>
                                         <div style="margin-bottom: 10px;">
@@ -245,7 +257,7 @@ onMounted(() => {
                                                 <h3 class="timeline-header"
                                                     style="font-size: smaller;line-height: 1 !important;"> <span
                                                         class="time"> {{
-                                                            formatDateStringHuman(report.date) }}
+                    formatDateStringHuman(report.date) }}
                                                     </span></h3>
                                                 <div class="timeline-body"
                                                     style="font-size: small; line-height: 1 !important;">
@@ -256,11 +268,11 @@ onMounted(() => {
                                                     <div style="text-align: right;">
 
                                                         <span style="font-size: smaller; width:100%">
-                                                            Bukti Dukung 
+                                                            Bukti Dukung
                                                             <template v-if="work.evidence_url">
                                                                 <a target="blank" :href="work.evidence_url ?? '#'">
                                                                     [ {{
-                                                                        work.evidence }} ]</a>
+                    work.evidence }} ]</a>
                                                             </template>
                                                             <template v-else>
                                                                 [ {{ work.evidence }} ]
@@ -326,15 +338,16 @@ onMounted(() => {
                                             <template v-if="report.works.length > 0">
 
                                                 <tr v-for="(work, iSub) in report.works" :key="work.id">
-                                                    <td v-if="iSub === 0" :rowspan="report.works.length" class="s text-sm"
-                                                        style="white-space: pre;">
+                                                    <td v-if="iSub === 0" :rowspan="report.works.length"
+                                                        class="s text-sm" style="white-space: pre;">
                                                         {{ formatDateString(report.date) }}</td>
                                                     <td class="text-center text-sm">{{ iSub + 1 }}</td>
                                                     <td class="s text-sm">
                                                         {{ work.work_name }} <br>
-                                                        <p class="text-muted m-0 p-0" style="font-size:smaller !important;">
+                                                        <p class="text-muted m-0 p-0"
+                                                            style="font-size:smaller !important;">
                                                             {{
-                                                                work.work_detail }}</p>
+                    work.work_detail }}</p>
                                                     </td>
                                                     <!-- <td class="s">{{ work.work_detail }}</td> -->
                                                     <td class="s text-right text-sm">{{ work.volume }}</td>
@@ -342,7 +355,7 @@ onMounted(() => {
                                                     <td class="s text-sm">
                                                         <template v-if="work.evidence_url">
                                                             <a target="blank" :href="work.evidence_url ?? '#'">{{
-                                                                work.evidence }}</a>
+                    work.evidence }}</a>
                                                         </template>
                                                         <template v-else>
                                                             {{ work.evidence }}
@@ -353,7 +366,8 @@ onMounted(() => {
                                                         <router-link :to="`/admin/reports/${work.id}/edit`">
                                                             <i class="fa fa-edit"></i>
                                                         </router-link>
-                                                        <a href="#" @click.prevent="$event => deleteWork(index, work.id)">
+                                                        <a href="#"
+                                                            @click.prevent="$event => deleteWork(index, work.id)">
                                                             <i class="fa fa-trash text-danger ml-2"></i>
                                                         </a>
                                                     </td>
@@ -398,8 +412,8 @@ onMounted(() => {
                             </div>
                         </div>
                     </div>
-                    <Bootstrap4Pagination :data="reports" @pagination-change-page="getReports" :limit="1" :keepLength="true"
-                        style="margin-bottom: 100px;" />
+                    <Bootstrap4Pagination :data="reports" @pagination-change-page="getReports" :limit="1"
+                        :keepLength="true" style="margin-bottom: 100px;" />
                 </div>
             </div>
         </div>
