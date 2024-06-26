@@ -28,8 +28,8 @@ const handleSubmit = () => {
             router.push('/admin/dashboard');
         })
         .catch((error) => {
-            // console.log(error);
-            // console.log(error.response.data.message);
+            console.log(error);
+            console.log(error.response.data.message);
             errorMessage.value = error.response.data.message;
         })
         .finally(() => {
