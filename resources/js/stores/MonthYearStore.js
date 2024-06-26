@@ -11,6 +11,18 @@ export const useMonthYearStore = defineStore('MonthYearStore', () => {
     const mySelected = useStorage('SettingStore:mySelected', ref(''));
     const myOptions = ref([
         {
+            text: moment().subtract(5, 'months').format('MMMM  YYYY'),
+            id: moment().subtract(5, 'months').format('YYYY-MM')
+        },
+        {
+            text: moment().subtract(4, 'months').format('MMMM  YYYY'),
+            id: moment().subtract(4, 'months').format('YYYY-MM')
+        },
+        {
+            text: moment().subtract(3, 'months').format('MMMM  YYYY'),
+            id: moment().subtract(3, 'months').format('YYYY-MM')
+        },
+        {
             text: moment().subtract(2, 'months').format('MMMM  YYYY'),
             id: moment().subtract(2, 'months').format('YYYY-MM')
         },
