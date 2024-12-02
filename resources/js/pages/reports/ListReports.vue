@@ -345,9 +345,7 @@ onMounted(() => {
                                                     <td class="s text-sm">
                                                         {{ work.work_name }} <br>
                                                         <p class="text-muted m-0 p-0"
-                                                            style="font-size:smaller !important;">
-                                                            {{
-                    work.work_detail }}</p>
+                                                            style="font-size:smaller !important;" v-html="work.work_detail"></p>
                                                     </td>
                                                     <!-- <td class="s">{{ work.work_detail }}</td> -->
                                                     <td class="s text-right text-sm">{{ work.volume }}</td>

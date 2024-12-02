@@ -75,6 +75,22 @@
     "file": "assets/fa-solid-900-BUswJgRo.woff2",
     "src": "node_modules/admin-lte/plugins/fontawesome-free/webfonts/fa-solid-900.woff2"
   },
+  "node_modules/admin-lte/plugins/summernote/font/summernote.eot": {
+    "file": "assets/summernote-CIJFJttR.eot",
+    "src": "node_modules/admin-lte/plugins/summernote/font/summernote.eot"
+  },
+  "node_modules/admin-lte/plugins/summernote/font/summernote.ttf": {
+    "file": "assets/summernote-BFwDdmZ-.ttf",
+    "src": "node_modules/admin-lte/plugins/summernote/font/summernote.ttf"
+  },
+  "node_modules/admin-lte/plugins/summernote/font/summernote.woff": {
+    "file": "assets/summernote-BpukxMI1.woff",
+    "src": "node_modules/admin-lte/plugins/summernote/font/summernote.woff"
+  },
+  "node_modules/admin-lte/plugins/summernote/font/summernote.woff2": {
+    "file": "assets/summernote-CG9AQWUQ.woff2",
+    "src": "node_modules/admin-lte/plugins/summernote/font/summernote.woff2"
+  },
   "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.eot": {
     "file": "assets/MaterialIcons-Regular-BjXOXp5c.eot",
     "src": "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.eot"
@@ -92,7 +108,7 @@
     "src": "node_modules/material-design-icons-iconfont/dist/fonts/MaterialIcons-Regular.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-ewPj7xWZ.css",
+    "file": "assets/app-3ScMaSVA.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -100,7 +116,7 @@
     "css": [
       "assets/app-DIAIkDS-.css"
     ],
-    "file": "assets/app-D-dbwB3k.js",
+    "file": "assets/app-iLqNYzEl.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

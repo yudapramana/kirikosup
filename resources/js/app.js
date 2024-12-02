@@ -5,6 +5,8 @@ import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js';
 
 import 'admin-lte/dist/js/adminlte.min.js';
 
+import 'admin-lte/plugins/summernote/summernote-bs4.min.js';
+
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
 
 import { createPinia } from 'pinia';
@@ -24,10 +26,12 @@ import PrimeVue from 'primevue/config';
 import { useDashboardStore } from './stores/DashboardStore.js';
 import { useMasterDataStore } from './stores/MasterDataStore.js';
 import Select2 from 'vue3-select2-component';
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+import SummernoteEditor from 'vue3-summernote-editor';
+
 
 const vuetify = createVuetify({
     components,
@@ -67,7 +71,7 @@ app.use(router);
 app.use(PrimeVue);
 app.use(vuetify);
 app.component('Select2', Select2);
-
+app.component('SummernoteEditor', SummernoteEditor);
 
 
 // if(window.location.pathname === '/login') {

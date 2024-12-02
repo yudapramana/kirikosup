@@ -85,7 +85,6 @@ const getReport = () => {
                 form.unit = response.data.unit_value;
                 form.evidence = response.data.evidence;
                 form.evidence_url = response.data.evidence_url;
-
             }
         });
 };
@@ -102,6 +101,11 @@ onMounted(() => {
         disableMobile: true,
     });
 });
+
+// watch(() => [form.work_detail], function (val) {
+//     console.log('summernote called')
+//     $('#summernote').summernote("code", val);
+// });
 
 </script>
 
@@ -160,16 +164,27 @@ onMounted(() => {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="work_detail">Deskripsi Tugas (Opsional)</label>
                                     <input v-model="form.work_detail" type="text" class="form-control"
-                                                :class="{ 'is-invalid': errors.work_detail }" id="work_detail"
-                                                placeholder="Masukkan deskripsi tugas...">
+                                        :class="{ 'is-invalid': errors.work_detail }" id="work_detail"
+                                        placeholder="Masukkan deskripsi tugas..."> -->
                                     <!-- <textarea v-model="form.work_detail" class="form-control"
                                         :class="{ 'is-invalid': errors.work_detail }" id="work_detail" rows="3"
                                         placeholder="Masukkan deskripsi tugas..."></textarea> -->
+                                    <!-- <span class="invalid-feedback">{{ errors.work_detail }}</span>
+                                </div> -->
+
+                                <div class="form-group">
+                                    <label for="work_detail">Deskripsi Tugas (Opsional)</label>
+                                    
+
+                                    <SummernoteEditor v-model="form.work_detail"  />
+
                                     <span class="invalid-feedback">{{ errors.work_detail }}</span>
                                 </div>
+
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -195,6 +210,7 @@ onMounted(() => {
                                                 <option value="7">Volume</option>
                                                 <option value="8">Modul</option>
                                                 <option value="9">Jam</option>
+                                                <option value="10">Surat</option>
 
                                             </select>
                                             <span class="invalid-feedback">{{ errors.unit }}</span>
