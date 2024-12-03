@@ -164,25 +164,25 @@ onMounted(() => {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="form-group">
+                                 <div class="form-group">
                                     <label for="work_detail">Deskripsi Tugas (Opsional)</label>
-                                    <input v-model="form.work_detail" type="text" class="form-control"
+                                    <!-- <input v-model="form.work_detail" type="text" class="form-control"
                                         :class="{ 'is-invalid': errors.work_detail }" id="work_detail"
                                         placeholder="Masukkan deskripsi tugas..."> -->
-                                    <!-- <textarea v-model="form.work_detail" class="form-control"
+                                     <textarea v-model="form.work_detail" class="form-control"
                                         :class="{ 'is-invalid': errors.work_detail }" id="work_detail" rows="3"
-                                        placeholder="Masukkan deskripsi tugas..."></textarea> -->
-                                    <!-- <span class="invalid-feedback">{{ errors.work_detail }}</span>
-                                </div> -->
+                                        placeholder="Masukkan deskripsi tugas..."></textarea> 
+                                     <span class="invalid-feedback">{{ errors.work_detail }}</span>
+                                </div> 
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="work_detail">Deskripsi Tugas (Opsional)</label>
                                     
 
                                     <SummernoteEditor v-model="form.work_detail"  />
 
                                     <span class="invalid-feedback">{{ errors.work_detail }}</span>
-                                </div>
+                                </div> -->
 
 
                                 <div class="row">
